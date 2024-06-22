@@ -3,7 +3,7 @@ import { LoginComponent } from '../login/login.component';
 import { NgModule } from '@angular/core';
 
 export const routes: Routes = [
- { path: 'login', component: LoginComponent }, // Adicione a rota para o login
+ { path: 'login', loadChildren: () => import('../login/login.module').then(m => m.LoginModule) },
  // Outras rotas da sua aplicação
 ];
 

@@ -1,0 +1,21 @@
+[debug] [2024-06-22T19:19:15.066Z] ----------------------------------------------------------------------
+[debug] [2024-06-22T19:19:15.088Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\C3PO\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2024-06-22T19:19:15.088Z] CLI Version:   13.11.4
+[debug] [2024-06-22T19:19:15.089Z] Platform:      win32
+[debug] [2024-06-22T19:19:15.089Z] Node Version:  v20.13.1
+[debug] [2024-06-22T19:19:15.089Z] Time:          Sat Jun 22 2024 16:19:15 GMT-0300 (Horário Padrão de Brasília)
+[debug] [2024-06-22T19:19:15.090Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-06-22T19:19:15.102Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-06-22T19:19:15.103Z] > authorizing via signed-in user (veronicaschiller17@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\C3PO\Documents\fw2-final work\ArSchiller_tech
+

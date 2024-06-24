@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { LoginComponent } from '../login/login.component';
+import * as M from 'materialize-css';
 
 @Component({
   selector: 'app-root',
@@ -11,4 +12,9 @@ import { LoginComponent } from '../login/login.component';
 })
 export class AppComponent {
   title = 'ArSchiller_tech';
+
+  ngAfterViewInit() {
+    const elems = document.querySelectorAll('.sidenav');
+    M.Sidenav.init(elems);
+  }
 }

@@ -1,6 +1,6 @@
 <div class="login-container">
  <h2>Login</h2>
- <form (ngSubmit)="login()">
+ <form >
    <div class="form-group">
      <label for="email">Email:</label>
      <input type="email" id="email"  name="email" required class="form-control">
@@ -10,6 +10,6 @@
      <input type="password" id="password"  name="password" required class="form-control">
    </div>
    <button type="submit" class="btn btn-primary">Login</button>
-   <div  class="error-message">{{ errorMessage }}</div>
+   <div  class="error-message"></div>
  </form>
 </div>

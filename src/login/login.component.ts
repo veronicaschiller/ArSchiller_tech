@@ -2,11 +2,10 @@ import { Component } from '@angular/core';
 import { AuthService } from '../service/Auth.service';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { ClientService } from '../service/client.service';
 
 @Component({
   selector: 'app-login',
-  standalone: true,
-  imports: [FormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
@@ -14,7 +13,12 @@ export class LoginComponent {
   email: string = '';
   password: string = '';
   errorMessage: string = '';
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private clientService: ClientService
+      
+  ) {}
 
   login() {
     this.authService
@@ -25,5 +29,9 @@ export class LoginComponent {
       .catch((error) => {
         this.errorMessage = error.message;
       });
+  }
+
+  signup() {
+    this.clientService
   }
 }

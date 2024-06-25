@@ -1,30 +1,32 @@
 import { NgModule } from "@angular/core";
-import { AppComponent } from "./app.component";
 import { BrowserModule } from "@angular/platform-browser";
-import { FormsModule } from "@angular/forms";
 import { AppRoutingModule } from "./app.routes";
-import { environment } from "../envitonments/environment";
-import { AngularFireModule } from "@angular/fire/compat";
-import { AngularFireDatabaseModule } from "@angular/fire/compat/database";
+import { getFirestore, provideFirestore } from "@angular/fire/firestore";
+import { initializeApp, provideFirebaseApp } from "@angular/fire/app";
+import { SingupComponent } from "../singup/singup.component";
 import { LoginComponent } from "../login/login.component";
-import { RouterModule, Routes } from "@angular/router";
+import { AppComponent } from "./app.component";
+import { environment } from "../envitonments/environment";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
-const routes: Routes = [
-    { path: 'login', component: LoginComponent },
-    { path: '', redirectTo: '/login', pathMatch: 'full' }
-  ]
+
 @NgModule({
+    declarations: [
+        AppComponent,
+        SingupComponent,
+        LoginComponent
+    ],
     imports:[
         BrowserModule,
         FormsModule,
+        ReactiveFormsModule,
         AppRoutingModule,
-        RouterModule.forRoot(routes),
-        AngularFireModule.initializeApp(environment.firebase),
-        AngularFireDatabaseModule,  
-        
     ],
-    providers:[],
-    bootstrap:[]
+    providers:[   
+        provideFirebaseApp(() => initializeApp(environment.firebase)),
+        provideFirestore(() => getFirestore())
+    ],
+    bootstrap:[AppComponent]
 })
 
 export class AppModule {}

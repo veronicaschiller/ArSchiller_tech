@@ -9,8 +9,9 @@ export class AuthService {
 
   constructor(private afAuth: AngularFireAuth) { }
 
-  login(email: string, password: string): Promise<firebase.auth.UserCredential> {
-    return this.afAuth.signInWithEmailAndPassword(email, password);
+  async login(email: string, password: string): Promise<firebase.auth.UserCredential> {
+    console.log("Estou aqui!")
+    return await this.afAuth.signInWithEmailAndPassword(email, password);
   }
 
   logout(): Promise<void> {

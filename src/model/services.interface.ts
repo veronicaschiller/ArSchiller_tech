@@ -1,0 +1,7 @@
+export enum Services {
+    ELETRECISTA = 'ELETRECISTA',
+    MECÃNICO = 'MECÃNICO',
+    PEDREIRO = 'PEDREIRO',
+    MOTORISTA = 'MOTORISTA',
+    ENCANADOR = 'ENCANADOR'
+}

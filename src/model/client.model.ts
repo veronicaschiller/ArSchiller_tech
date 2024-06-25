@@ -1,4 +1,5 @@
-import { randomUUID } from 'node:crypto'
+import { Timestamp } from 'firebase/firestore';
+import { v4 as uuidv4 } from 'uuid';
 
 export class Client {
     uid: string;
@@ -6,9 +7,9 @@ export class Client {
     email: string;
     password: string;
     emailVerified: boolean = false;
-    createdAt: string
-    updatedAt: string
-    deletedAt?: string
+    createdAt: Timestamp
+    updatedAt: Timestamp
+    deletedAt?: Timestamp | null
 
     constructor(
         name: string,
@@ -17,12 +18,12 @@ export class Client {
         emailVerified: boolean,
 
     ) {
-        this.uid = randomUUID()
+        this.uid = uuidv4()
         this.name = name;
         this.email = email;
         this.password = password;
         this.emailVerified = emailVerified;
-        this.createdAt = String(Date.now());
-        this.updatedAt = String(Date.now());
+        this.createdAt = Timestamp.now();
+        this.updatedAt = Timestamp.now();
       }
 }

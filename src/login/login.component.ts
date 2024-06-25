@@ -1,37 +1,33 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../service/Auth.service';
 import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
-import { ClientService } from '../service/client.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
+  styleUrls: ['./login.component.css'],
 })
+
 export class LoginComponent {
-  email: string = '';
-  password: string = '';
-  errorMessage: string = '';
+  dataLogin: any = {
+    email: '',
+    password: '',
+    errorMessage: ''
+  }
+
   constructor(
     private authService: AuthService,
-    private router: Router,
-    private clientService: ClientService
-      
+    private router: Router      
   ) {}
 
   login() {
     this.authService
-      .login(this.email, this.password)
+      .login(this.dataLogin.email, this.dataLogin.password)
       .then(() => {
         this.router.navigate(['/dashboard']); // Redirecionar para a página do dashboard após o login
       })
       .catch((error) => {
-        this.errorMessage = error.message;
+        this.dataLogin.errorMessage = error.message;
       });
-  }
-
-  signup() {
-    this.clientService
   }
 }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { Firestore, addDoc, collection } from '@angular/fire/firestore';
-import { FormsModule } from '@angular/forms';
+import { Firestore, Timestamp, addDoc, collection } from '@angular/fire/firestore';
 import { Client } from '../model/client.model';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-singup',
@@ -9,26 +9,24 @@ import { Client } from '../model/client.model';
   styleUrls: ['./singup.component.css']
 })
 export class SingupComponent {
-client: Client ={
-  uid:"",
-    name: "",
-    email: '',
-    password: " ",
-    emailVerified: false ,
-    createdAt: "",
-    updatedAt: '',
-    deletedAt: "string" || null
-
-
-}
+  client: Client = {
+      uid: uuidv4(),
+      name: "",
+      email: "",
+      password: "",
+      emailVerified: false ,
+      createdAt: Timestamp.now(),
+      updatedAt: Timestamp.now(),
+      deletedAt: null,
+  }
 
   constructor (private firestore:Firestore ) {}
 
   create(){
-    const singupcollection = collection(this.firestore, 'client')
+    const singupcollection = collection(this.firestore, 'clients')
   addDoc(singupcollection, this.client)
   .then(() => {
-    console.log(this.client.name+ 'cadastrado com sucesso, vá ate a tela de login');
+    console.log(this.client.name);
       this.client 
   }).catch((err) => {
     console.log(err);

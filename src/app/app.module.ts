@@ -11,7 +11,7 @@ import { initializeApp, provideFirebaseApp } from "@angular/fire/app";
 import { getFirestore, provideFirestore } from "@angular/fire/firestore";
 import { HomeComponent } from "../home/home.component";
 import { HomeClientComponent } from "../home-client/home-client.component";
-import { LoginClientComponent } from "../login-client/login-client.component";
+import { LoginClientComponent } from "./login-client/login-client.component";
 
 @NgModule({
     declarations: [

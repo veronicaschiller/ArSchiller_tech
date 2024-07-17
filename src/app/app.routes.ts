@@ -4,7 +4,7 @@ import { SingupComponent } from '../singup/singup.component';
 import { LoginComponent } from '../login/login.component';
 import { HomeComponent } from '../home/home.component';
 import { HomeClientComponent } from '../home-client/home-client.component';
-import { LoginClientComponent } from '../login-client/login-client.component';
+import { LoginClientComponent } from './login-client/login-client.component';
 
 export const routes: Routes = [
 {path:'', component:HomeComponent},

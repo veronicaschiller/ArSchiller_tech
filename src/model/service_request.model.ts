@@ -16,6 +16,7 @@ export class ServiceRequest {
     updatedAt!: Timestamp
     deletedAt?: Timestamp
     quotes?: Quote[]
+    isActived: Boolean = true
 
     constructor (
         title: string,

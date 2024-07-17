@@ -1,0 +1,25 @@
+
+<body>
+    <div class="container">
+        <div class="bg-illustration">
+            <img src="assets/images/AssetsHome.png" alt="Illustration">
+        </div>
+        <div class="login-container">
+            <h2>Cliente</h2>
+            <p>Se você quer achar prestadores de serviço para sua demanda, faça o login abaixo ou cadastre-se.</p>
+            <form>
+                <div class="input-group">
+                    <label for="email">e-mail</label>
+                    <input type="email" id="email" name="email" (ngModel)="dataLogin.email" required class="form-control">
+                </div>
+                <div class="input-group">
+                    <label for="senha">senha</label>
+                    <input type="password" id="senha" name="senha" (ngModel)="dataLogin.password" required class="form-control">
+                </div>
+                <button type="submit" class="login-btn" (click)="login()">Entrar como cliente</button>
+            </form>
+            <a href="#" class="register-link">Cadastre-se como cliente</a>
+        </div>
+    </div>
+</body>
+

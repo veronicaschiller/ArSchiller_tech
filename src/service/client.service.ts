@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import firebase from 'firebase/compat/app';
 import { Client } from '../model/client.model'
 
 @Injectable({
@@ -13,8 +11,8 @@ export class ClientService {
     data.name,
     data.email,
     data.password,
-    data.emailVerified,
   )
+  
   return client
   }
 }

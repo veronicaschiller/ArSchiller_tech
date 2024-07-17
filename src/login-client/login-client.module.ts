@@ -15,4 +15,4 @@ import { environment } from '../envitonments/environment';
   ],
   providers: [AuthService]
 })
-export class LoginModule {}
+export class LoginClientModule {}

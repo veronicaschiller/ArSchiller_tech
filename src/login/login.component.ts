@@ -24,7 +24,7 @@ export class LoginComponent {
     this.authService
       .login(this.dataLogin.email, this.dataLogin.password)
       .then(() => {
-        this.router.navigate(['/dashboard']); // Redirecionar para a página do dashboard após o login
+        this.router.navigate(['/home']); // Redirecionar para a página do dashboard após o login
       })
       .catch((error) => {
         this.dataLogin.errorMessage = error.message;

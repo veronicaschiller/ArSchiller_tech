@@ -5,12 +5,14 @@ import { LoginComponent } from '../login/login.component';
 import { HomeComponent } from '../home/home.component';
 import { HomeClientComponent } from '../home-client/home-client.component';
 import { LoginClientComponent } from './login-client/login-client.component';
+import { SingupProviderComponent } from '../singup_provider/singup-provider.component';
 
 export const routes: Routes = [
 {path:'', component:HomeComponent},
  {path:'homeClient', component: HomeClientComponent},
  {path:'home', component: HomeComponent},
  {path:'singup', component: SingupComponent},
+ {path:'singup-provider', component: SingupProviderComponent},
  {path:'login', component: LoginComponent},
  {path:'loginClient', component: LoginClientComponent},
 

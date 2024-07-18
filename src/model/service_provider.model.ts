@@ -1,4 +1,3 @@
-import { Services } from './services.interface'
 import { Timestamp } from 'firebase/firestore';
 
 export class ServiceProvider {
@@ -7,7 +6,7 @@ export class ServiceProvider {
     email!: string;
     password!: string;
     emailVerified: boolean = false;
-    services!: Services[]
+    services!: String[]
     createdAt!: Timestamp
     updatedAt!: Timestamp
     deletedAt?: Timestamp | null
@@ -16,7 +15,7 @@ export class ServiceProvider {
         name: string,
         email: string,
         password: string,
-        services: Services[]
+        services: String[]
 
     ) {
         this.name = name;

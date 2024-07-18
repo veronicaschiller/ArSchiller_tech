@@ -12,18 +12,22 @@ import { getFirestore, provideFirestore } from "@angular/fire/firestore";
 import { HomeComponent } from "../home/home.component";
 import { HomeClientComponent } from "../home-client/home-client.component";
 import { LoginClientComponent } from "./login-client/login-client.component";
+import { SingupProviderComponent } from "../singup_provider/singup-provider.component";
+import { CommonModule } from "@angular/common";
 
 @NgModule({
     declarations: [
         AppComponent,
         LoginComponent,
         SingupComponent,
+        SingupProviderComponent,
         HomeComponent,
         HomeClientComponent,
         LoginClientComponent
     ],
     imports:[
         BrowserModule,
+        CommonModule,
         FormsModule,
         LoginModule,
         ReactiveFormsModule,

@@ -5,20 +5,20 @@ import { LoginComponent } from '../login/login.component';
 import { HomeComponent } from '../home/home.component';
 import { HomeClientComponent } from '../home-client/home-client.component';
 import { LoginClientComponent } from './login-client/login-client.component';
+import { RegistertaskComponent } from '../registertask/registertask.component';
 
 export const routes: Routes = [
-{path:'', component:HomeComponent},
- {path:'homeClient', component: HomeClientComponent},
- {path:'home', component: HomeComponent},
- {path:'singup', component: SingupComponent},
- {path:'login', component: LoginComponent},
- {path:'loginClient', component: LoginClientComponent},
-
+  { path: '', component: HomeComponent },
+  { path: 'registerTask', component: RegistertaskComponent },
+  { path: 'homeClient', component: HomeClientComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'singup', component: SingupComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'loginClient', component: LoginClientComponent },
 ];
 
 @NgModule({
- imports: [RouterModule.forRoot(routes)],
- exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
 })
-
 export class AppRoutingModule {}

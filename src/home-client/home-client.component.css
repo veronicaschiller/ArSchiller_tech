@@ -180,25 +180,12 @@ h2 {
 .sidebar {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: flex-start;
   gap: 24px;
   align-self: stretch;
+  padding: 40px 40px 0px 40px;
 }
 .Btt {
-    display: flex;
-    padding: 12px 0px 12px 12px;
-    align-items: center;
-    gap: 6px;
-    align-self: stretch;
-    border-radius: 4px;
-    width: 312px;
-    height: 44px;
-    background: #18181B;
-    border-style: none;
-  }
-
-.Btt::after {
   display: flex;
   padding: 12px 0px 12px 12px;
   align-items: center;
@@ -207,6 +194,36 @@ h2 {
   border-radius: 4px;
   width: 312px;
   height: 44px;
-  background: var(--lime-300, #bef264);
+  background: #18181b;
   border-style: none;
+  color: #ffff;
+}
+
+.Btt.selected {
+  background-color: var(--lime-300, #bef264); /* Verde */
+}
+
+.BttCadastro {
+  display: flex;
+  padding: 12px 20px;
+  justify-content: center;
+  align-items: center;
+  width: 312px;
+  height: 44px;
+  border-style: none;
+  gap: 8px;
+  align-self: stretch;
+  border-radius: 4px;
+  background: var(--lime-300, #bef264);
+}
+
+.textBttCadastro {
+  color: var(--lime-950, #1a2e05);
+  /* Button */
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.32px;
 }

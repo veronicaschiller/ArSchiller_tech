@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../service/Auth.service';
 import { Router } from '@angular/router';
+import { ClientService } from '../../service/client.service';
 
 @Component({
   selector: 'app-login-client',
@@ -16,13 +17,16 @@ export class LoginClientComponent {
   
     constructor(
       private authService: AuthService,
-      private router: Router      
+      private router: Router,
+      private clientService: ClientService     
     ) {}
   
     login() {
+      this.clientService.getClientByEmail(this.dataLogin.email)
       this.authService
         .login(this.dataLogin.email, this.dataLogin.password)
-        .then(() => {
+        .then((UserCredential) => {
+          sessionStorage.setItem('userEmail', String(UserCredential.user?.email))
           this.router.navigate(['/homeClient']); // Redirecionar para a página do dashboard após o login
         })
         .catch((error) => {

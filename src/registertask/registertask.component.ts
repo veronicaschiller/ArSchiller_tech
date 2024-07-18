@@ -1,4 +1,13 @@
 import { Component } from '@angular/core';
+import {
+  Firestore,
+  Timestamp,
+  addDoc,
+  collection,
+} from '@angular/fire/firestore';
+import { ServiceRequest } from '../model/service_request.model';
+import { v4 as uuidv4 } from 'uuid';
+import { ClientService } from '../service/client.service';
 
 @Component({
   selector: 'app-registertask',
@@ -6,5 +15,55 @@ import { Component } from '@angular/core';
   styleUrl: './registertask.component.css'
 })
 export class RegistertaskComponent {
+  servicesTemplate: String[] = [
+    'Carpinteiro', 'Eletricista', 'Pintor', 'Pedreiro', 'Mecânico','Encanador', 'Jardineiro',
+    'Marceneiro', 'Serralheiro', 'Vidraceiro', 'Técnico de Refrigeração', 'Técnico de informática'
+  ]
 
+  priorityTemplate: String[] = ['Muito baixa', 'Baixa','Média', 'Alta', 'Muito Alta']
+
+  stateTemplate: String[] = [
+    'AC', 'AL', 'AM', 'AP', 'BA', 'CE', 'DF', 'ES', 'GO',
+    'MA', 'MG', 'MS', 'MT', 'PA', 'PB', 'PE', 'PI',
+    'PR', 'RJ', 'RN', 'RO', 'RR', 'RS', 'SC', 
+    'SE', 'SP', 'TO' 
+]
+
+  constructor(private firestore: Firestore, private clientService: ClientService) {}
+
+  task: ServiceRequest = {
+    uid: uuidv4(),
+    title: '',
+    description: '',
+    tagService: [],
+    priority: '',
+    city: '',
+    state: '',
+    clientId: String(this.clientService.getClientByEmail(String(sessionStorage.getItem('userEmail')))),
+    isActived: true,
+    createdAt: Timestamp.now(),
+    updatedAt: Timestamp.now(),
+    deletedAt: null,
+  };
+
+  toggleSelection(value: string): void {
+    if(this.task.tagService.includes(value)) {
+      this.task.tagService.splice(this.task.tagService.indexOf(value), 1)
+    } else {
+      this.task.tagService.push(value)
+    }
+      console.log(this.task.tagService)
+  }
+
+  create() {
+    const singupcollection = collection(this.firestore, 'tasks');
+    addDoc(singupcollection, this.task)
+      .then(() => {
+        console.log(this.task.title);
+        this.task;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 }

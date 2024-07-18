@@ -14,6 +14,7 @@ import { HomeClientComponent } from "../home-client/home-client.component";
 import { LoginClientComponent } from "./login-client/login-client.component";
 import { SingupProviderComponent } from "../singup_provider/singup-provider.component";
 import { CommonModule } from "@angular/common";
+import { RegistertaskComponent } from "../registertask/registertask.component";
 
 @NgModule({
     declarations: [
@@ -23,7 +24,8 @@ import { CommonModule } from "@angular/common";
         SingupProviderComponent,
         HomeComponent,
         HomeClientComponent,
-        LoginClientComponent
+        LoginClientComponent,
+        RegistertaskComponent
     ],
     imports:[
         BrowserModule,

@@ -1,0 +1,83 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Arial", sans-serif;
+    background-color: #292929;
+    color: #fff;
+  }
+  
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+  }
+  
+  .content {
+    max-width: 800px;
+  }
+  .contentBotton {
+      width: 618px;
+      height: 42px;
+      top: 687px;
+      left: 711px;
+      gap: 48px;
+      opacity: 0px;
+      
+  }
+  
+  h1 {
+    font-family: inter;
+    font-size: 48px;
+    font-weight: 300;
+    line-height: 72px;
+    letter-spacing: -0.02em;
+    text-align: left;
+  }
+  
+  button {
+      width: 285px;
+      height: 42px;
+      padding: 8px 20px 8px 20px;
+      border-radius:8px;
+      
+  }
+  
+  strong {
+    font-family: Inter;
+    font-size: 48px;
+    font-weight: 800;
+    line-height: 72px;
+    letter-spacing: -0.02em;
+    text-align: left;
+  }
+  
+  button.client {
+    background-color: #BEF264;
+    color: #000;
+  }
+  
+  button.provider {
+    background-color: #2a2a2a;
+    color: #fff;
+    border: 1px solid #BEF264;
+  }
+  
+  /* Adicionando estilo à imagem e ao fundo */
+  .image {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .bg-illustration {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .bg-illustration img {
+    width: 100%;
+    max-width: 300px;
+  }
+  

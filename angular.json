@@ -27,9 +27,13 @@
               }
             ],
             "styles": [
+              "node_modules/materialize-css/dist/css/materialize.min.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+               "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/materialize-css/dist/js/materialize.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -85,12 +89,19 @@
               }
             ],
             "styles": [
+              "node_modules/materialize-css/dist/css/materialize.min.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+               "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/materialize-css/dist/js/materialize.min.js"
+            ]
           }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "758dec6a-b64d-4cf3-8648-7325b6eee7b3"
   }
 }

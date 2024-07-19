@@ -1,0 +1,27 @@
+body {
+    font-family: Inter, sans-serif;
+    background-color: #333;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+.services {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+}
+
+.service {
+    padding: 10px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    color: white;
+    background-color: #666
+}
+
+.validate {
+    color: white;
+}

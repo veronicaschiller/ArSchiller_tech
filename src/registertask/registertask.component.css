@@ -1,0 +1,135 @@
+body {
+  background-color: #292929;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: none;
+  height: 900px;
+  width: auto;
+}
+select {
+  position: relative;
+  top: 25px;
+  background: #e63936;
+  color: white;
+  border: none;
+  padding: 10px;
+  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.2);
+  width: 300px;
+  cursor: pointer;
+  display: flex;
+}
+
+.nameClient {
+  color: var(--zinc-50, #fafafa);
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: -0.4px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1 0 0;
+  align-self: stretch;
+  margin-top: 10px;
+  margin: 5px;
+}
+
+.demandas-em-aberto {
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  padding: 40px 40px 0px 40px;
+}
+.Btt {
+  display: flex;
+  padding: 12px 0px 12px 12px;
+  align-items: center;
+  gap: 6px;
+  align-self: stretch;
+  border-radius: 4px;
+  width: 312px;
+  height: 44px;
+  background: #18181b;
+  border-style: none;
+  color: #ffff;
+}
+
+.Btt.selected {
+  background-color: var(--lime-300, #bef264); /* Verde */
+}
+
+.BttCadastro {
+  display: flex;
+  padding: 12px 20px;
+  justify-content: center;
+  align-items: center;
+  width: 312px;
+  height: 44px;
+  border-style: none;
+  gap: 8px;
+  align-self: stretch;
+  border-radius: 4px;
+  background: var(--lime-300, #bef264);
+}
+
+.textBttCadastro {
+  color: var(--lime-950, #1a2e05);
+  /* Button */
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.32px;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.input-group {
+  display: flex;
+}
+
+.input-group .form-control {
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+.btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}

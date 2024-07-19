@@ -1,0 +1,57 @@
+<body>
+  <div class="container">
+    <div class="bg-illustration">
+      <svg xmlns="src/assets/Accept request-bro 1.svg" alt="Illustration"></svg>
+    </div>
+    <div class="login-container">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="39"
+        height="39"
+        viewBox="0 0 39 39"
+        fill="none"
+      >
+        <path
+          d="M26 19.5H13M13 19.5L19.5 13M13 19.5L19.5 26M35.75 19.5C35.75 28.4746 28.4746 35.75 19.5 35.75C10.5254 35.75 3.25 28.4746 3.25 19.5C3.25 10.5254 10.5254 3.25 19.5 3.25C28.4746 3.25 35.75 10.5254 35.75 19.5Z"
+          stroke="#BEF264"
+          stroke-width="1.66667"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+      <h2>Cliente</h2>
+      <p>
+        Se você quer achar prestadores de serviço para sua demanda, faça o login
+        abaixo ou cadastre-se.
+      </p>
+      <form>
+        <div class="input-group">
+          <label for="email">e-mail</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            [(ngModel)]="(dataLogin.email)"
+            required
+            class="form-control"
+          />
+        </div>
+        <div class="input-group">
+          <label for="senha">senha</label>
+          <input
+            type="password"
+            id="senha"
+            name="senha"
+            [(ngModel)]="(dataLogin.password)"
+            required
+            class="form-control"
+          />
+        </div>
+        <button type="submit" class="login-btn" (click)="login()">
+          Entrar como cliente
+        </button>
+      </form>
+      <a href="#" class="register-link" routerLink="/singup">Cadastre-se como cliente</a>
+    </div>
+  </div>
+</body>

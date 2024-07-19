@@ -1,13 +1,17 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+
+import M from 'materialize-css';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   title = 'ArSchiller_tech';
+
+  ngAfterViewInit() {
+    const elems = document.querySelectorAll('.sidenav');
+    M.Sidenav.init(elems);
+  }
 }

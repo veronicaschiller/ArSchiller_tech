@@ -14,6 +14,7 @@ import { ClientService } from '../service/client.service';
   templateUrl: './registertask.component.html',
   styleUrl: './registertask.component.css'
 })
+
 export class RegistertaskComponent {
   stateSelected: any = ''
   client: any = this.clientService.getClientByEmail(String(sessionStorage.getItem('userEmail')))

@@ -96,26 +96,40 @@ select {
   letter-spacing: -0.32px;
 }
 
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
 .label {
-  color: var(--zinc-50, #fafafa);
-  font-family: Inter;
-  font-size: 32px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  letter-spacing: -0.64px;
+  display: block;
+  margin-bottom: 5px;
 }
-.header {
+
+.input-group {
   display: flex;
-  align-items: center;
-  gap: 10px;
-  align-self: stretch;
 }
-.boxInput {
-  display: flex;
-  height: 56px;
-  padding: 10px 16px;
-  align-items: center;
-  gap: 12px;
-  align-self: stretch;
+
+.input-group .form-control {
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+.btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #0056b3;
 }

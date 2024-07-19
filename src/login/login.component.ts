@@ -23,6 +23,7 @@ export class LoginComponent {
   ) { }
 
   login() {
+    sessionStorage.clear()
     this.authService
       .login(this.dataLogin.email, this.dataLogin.password)
       .then((UserCredential) => {

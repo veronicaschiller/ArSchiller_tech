@@ -26,7 +26,7 @@ export class AuthorizationService {
         return clientRef.pipe(
             switchMap(clientSnapshot => {
                 if (!clientSnapshot.empty) {
-                    return 'client';
+                    return of('client');
                 } else {
                     return providerRef.pipe(
                         map(providerSnapshot => !providerSnapshot.empty ? 'provider' : '')

@@ -42,7 +42,7 @@ export class ClientService {
       querySnapShot.forEach((doc) => {
        clientData = { id: doc.id, ...doc.data() };
       });
-      return clientData.uid;
+      return String(clientData.uid);
     } catch (error) {
       console.error('Erro ao buscar cliente: ', error);
       return null;

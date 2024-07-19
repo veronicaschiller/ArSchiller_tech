@@ -15,6 +15,9 @@ import { ClientService } from '../service/client.service';
   styleUrl: './registertask.component.css'
 })
 export class RegistertaskComponent {
+  stateSelected: any = ''
+  client: any = this.clientService.getClientByEmail(String(sessionStorage.getItem('userEmail')))
+
   servicesTemplate: String[] = [
     'Carpinteiro', 'Eletricista', 'Pintor', 'Pedreiro', 'Mecânico','Encanador', 'Jardineiro',
     'Marceneiro', 'Serralheiro', 'Vidraceiro', 'Técnico de Refrigeração', 'Técnico de informática'
@@ -39,14 +42,14 @@ export class RegistertaskComponent {
     priority: '',
     city: '',
     state: '',
-    clientId: String(this.clientService.getClientByEmail(String(sessionStorage.getItem('userEmail')))),
+    clientId: '',
     isActived: true,
     createdAt: Timestamp.now(),
     updatedAt: Timestamp.now(),
     deletedAt: null,
   };
 
-  toggleSelection(value: string): void {
+  toggleSelectionService(value: string): void {
     if(this.task.tagService.includes(value)) {
       this.task.tagService.splice(this.task.tagService.indexOf(value), 1)
     } else {
@@ -54,12 +57,23 @@ export class RegistertaskComponent {
     }
       console.log(this.task.tagService)
   }
+  toggleSelectionPriority(value: string): void {
+    this.task.priority = ''
+    this.task.priority = value
+    console.log(this.task.priority)
+  }
+  toggleSelectionState(value: string): void {
+    this.task.state = ''
+    this.task.state = value
+    console.log(this.task.state)
+  }
 
   create() {
+    this.task.clientId = this.client.__zone_symbol__value.toString()
     const singupcollection = collection(this.firestore, 'tasks');
     addDoc(singupcollection, this.task)
       .then(() => {
-        console.log(this.task.title);
+        console.log(this.task.clientId);
         this.task;
       })
       .catch((err) => {

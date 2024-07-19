@@ -5,11 +5,19 @@ import { inject } from '@angular/core';
 
 export const authorizationGuardClient: CanActivateFn = (): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree => {
   const authorizationService = inject(AuthorizationService)
-    return authorizationService.obterLoginStatusClient()
+
+  if (!(authorizationService.obterLoginStatus() === 'client')) {
+    return false
   }
+  return true
+}
 export const authorizationGuardProvider: CanActivateFn = (): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree => {
   const authorizationService = inject(AuthorizationService)
-    return authorizationService.obterLoginStatusProvider()
+  
+  if (!(authorizationService.obterLoginStatus() === 'provider')) {
+    return false
   }
+  return true
+}
 
 // route, state 

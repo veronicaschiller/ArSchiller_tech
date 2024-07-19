@@ -13,38 +13,53 @@ export class LoginClientComponent {
   stateTemplate: String[] = [
     'AC', 'AL', 'AM', 'AP', 'BA', 'CE', 'DF', 'ES', 'GO',
     'MA', 'MG', 'MS', 'MT', 'PA', 'PB', 'PE', 'PI',
-    'PR', 'RJ', 'RN', 'RO', 'RR', 'RS', 'SC', 
-    'SE', 'SP', 'TO' 
-]
-    dataLogin: any = {
-      email: '',
-      password: '',
-      errorMessage: ''
-    }
-  
-    constructor(
-      private authService: AuthService,
-      private router: Router,
-      private authorizationService: AuthorizationService
-    ) {}
-  
-    login() {
-      this.authService
-        .login(this.dataLogin.email, this.dataLogin.password)
-        .then((UserCredential) => {
-          if(this.authorizationService.obterLoginStatusClient()){
-            this.authorizationService.deslogarClient()
-          } else {
-            this.authorizationService.autorizarClient()
-          }
-          sessionStorage.setItem('userEmail', String(UserCredential.user?.email))
-          this.router.navigate(['/homeClient']); // Redirecionar para a página do dashboard após o login
-        })
-        .catch((error) => {
-          this.dataLogin.errorMessage = error.message;
-        });
-    }
+    'PR', 'RJ', 'RN', 'RO', 'RR', 'RS', 'SC',
+    'SE', 'SP', 'TO'
+  ]
+  dataLogin: any = {
+    email: '',
+    password: '',
+    errorMessage: ''
   }
-  
+
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private authorizationService: AuthorizationService
+  ) { }
+
+  login() {
+    this.authService
+      .login(this.dataLogin.email, this.dataLogin.password)
+      .then((UserCredential) => {
+        if (UserCredential.user?.email) {
+          this.authorizationService.checkUserType(UserCredential.user.email)
+            .subscribe(userType => {
+              sessionStorage.setItem('userType', userType)
+              if (userType === 'client') {
+                sessionStorage.setItem('userEmail', String(UserCredential.user?.email))
+                this.router.navigate(['/homeClient']);
+              }
+              else if (userType === 'provider') {
+                this.authorizationService.deslogar()
+                alert('Você precisa fazer o login como prestador de serviço!')
+                this.router.navigate(['/login']);
+              }
+            })
+        }
+      })
+      .catch((error) => {
+        this.dataLogin.errorMessage = error.message;
+      });
+  }
+
+  logout() {
+    this.authService.logout().then(() => {
+      sessionStorage.clear();
+      this.router.navigate(['/home']);
+    });
+  }
+}
+
 
 

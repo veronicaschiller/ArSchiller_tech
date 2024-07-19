@@ -1,28 +1,38 @@
+import { Observable, of } from "rxjs"
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { switchMap, map } from 'rxjs/operators';
+import { Injectable } from "@angular/core";
 
+@Injectable({
+    providedIn: 'root'
+})
 
 export class AuthorizationService {
 
     authentication = false
 
-    constructor() {}
+    constructor(private firestore: AngularFirestore) { }
 
-    autorizarClient() {
-        sessionStorage.setItem('loginClient', 'sim')
-    }
-
-    deslogarClient(){
+    deslogar() {
         sessionStorage.clear()
     }
 
-    obterLoginStatusClient = () => !!sessionStorage.getItem('loginClient')
+    obterLoginStatus = () => sessionStorage.getItem('userType')
 
-    autorizarPovider() {
-        sessionStorage.setItem('loginProvider', 'sim')
+    checkUserType(email: string): Observable<string> {
+        const clientRef = this.firestore.collection('clients', ref => ref.where('email', '==', email)).get();
+        const providerRef = this.firestore.collection('service_providers', ref => ref.where('email', '==', email)).get();
+
+        return clientRef.pipe(
+            switchMap(clientSnapshot => {
+                if (!clientSnapshot.empty) {
+                    return 'client';
+                } else {
+                    return providerRef.pipe(
+                        map(providerSnapshot => !providerSnapshot.empty ? 'provider' : '')
+                    );
+                }
+            })
+        );
     }
-
-    deslogarProvider(){
-        sessionStorage.clear()
-    }
-
-    obterLoginStatusProvider = () => !!sessionStorage.getItem('loginProvider')
 }

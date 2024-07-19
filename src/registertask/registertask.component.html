@@ -214,25 +214,104 @@
       </button>
     </div>
     <div class="Container">
-        <div class="header">
-            <svg xmlns="http://www.w3.org/2000/svg" width="39" height="39" viewBox="0 0 39 39" fill="none">
-                <path d="M26 19.5H13M13 19.5L19.5 13M13 19.5L19.5 26M35.75 19.5C35.75 28.4746 28.4746 35.75 19.5 35.75C10.5254 35.75 3.25 28.4746 3.25 19.5C3.25 10.5254 10.5254 3.25 19.5 3.25C28.4746 3.25 35.75 10.5254 35.75 19.5Z" stroke="white" stroke-width="3.33333" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            <p class="label">Cadastrar demanda</p>
-        </div>
-        <div class="Nametask">
-            <p> Título da demanda</p>
-            <div class="boxInput">
-            <label for="text">Escreva aqui o título da demanda</label>
-            <input
-            type="text"
-            id="text"
-            name="text"
-            required
-            
+      <div class="header">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="39"
+          height="39"
+          viewBox="0 0 39 39"
+          fill="none"
+        >
+          <path
+            d="M26 19.5H13M13 19.5L19.5 13M13 19.5L19.5 26M35.75 19.5C35.75 28.4746 28.4746 35.75 19.5 35.75C10.5254 35.75 3.25 28.4746 3.25 19.5C3.25 10.5254 10.5254 3.25 19.5 3.25C28.4746 3.25 35.75 10.5254 35.75 19.5Z"
+            stroke="white"
+            stroke-width="3.33333"
+            stroke-linecap="round"
+            stroke-linejoin="round"
           />
-        </div>
-        </div>
+        </svg>
+      </div>
+      <div class="container">
+        <h4>Cadastrar Demanda</h4>
+
+        <form>
+          <div class="form-group">
+            <label for="tituloDemanda">Título da Demanda</label>
+            <input
+              type="text"
+              class="form-control"
+              id="tituloDemanda"
+              formControlName="tituloDemanda"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="prioridade">Prioridade</label>
+            <div class="services">
+              <a
+                class="service"
+                *ngFor="let priority of priorityTemplate"
+                (click)="toggleSelectionPriority(this.priority.toString())"
+                >{{ priority }}</a
+              >
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="servicos">Serviços</label>
+            <div class="services">
+              <a
+                class="service"
+                *ngFor="let service of servicesTemplate"
+                (click)="toggleSelectionService(this.service.toString())"
+                >{{ service }}</a
+              >
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="localizacao">Localização</label>
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                id="cidade"
+                formControlName="cidade"
+                required
+                [(ngModel)]="task.city"
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <select
+              name="Estado"
+              [(ngModel)]="stateSelected"
+              (change)="toggleSelectionState(this.stateSelected)"
+              class="form-control"
+            >
+              <option>--Estado--</option>
+              <option *ngFor="let state of stateTemplate">
+                {{ state }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="descricaoDemanda">Descrição da Demanda</label>
+            <textarea
+              class="form-control"
+              id="descricaoDemanda"
+              rows="5"
+              formControlName="descricaoDemanda"
+              required
+            ></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary" (click)="create()">
+            Salvar Demanda
+          </button>
+        </form>
+      </div>
     </div>
   </body>
 </html>

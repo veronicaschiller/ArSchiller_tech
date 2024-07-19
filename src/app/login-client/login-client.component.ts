@@ -9,6 +9,12 @@ import { ClientService } from '../../service/client.service';
   styleUrl: './login-client.component.css'
 })
 export class LoginClientComponent {
+  stateTemplate: String[] = [
+    'AC', 'AL', 'AM', 'AP', 'BA', 'CE', 'DF', 'ES', 'GO',
+    'MA', 'MG', 'MS', 'MT', 'PA', 'PB', 'PE', 'PI',
+    'PR', 'RJ', 'RN', 'RO', 'RR', 'RS', 'SC', 
+    'SE', 'SP', 'TO' 
+]
     dataLogin: any = {
       email: '',
       password: '',
@@ -22,7 +28,6 @@ export class LoginClientComponent {
     ) {}
   
     login() {
-      this.clientService.getClientByEmail(this.dataLogin.email)
       this.authService
         .login(this.dataLogin.email, this.dataLogin.password)
         .then((UserCredential) => {

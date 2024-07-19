@@ -15,6 +15,7 @@ import { LoginClientComponent } from "./login-client/login-client.component";
 import { SingupProviderComponent } from "../singup_provider/singup-provider.component";
 import { CommonModule } from "@angular/common";
 import { RegistertaskComponent } from "../registertask/registertask.component";
+import { AuthorizationService } from "../service/authorization.service";
 
 @NgModule({
     declarations: [
@@ -38,7 +39,8 @@ import { RegistertaskComponent } from "../registertask/registertask.component";
     ],
     providers:[   
         provideFirebaseApp(() => initializeApp(environment.firebase)),
-        provideFirestore(() => getFirestore())
+        provideFirestore(() => getFirestore()),
+        AuthorizationService
     ],
     bootstrap:[AppComponent]
 })

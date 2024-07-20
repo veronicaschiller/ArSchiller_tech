@@ -42,6 +42,8 @@ export class ClientService {
       querySnapShot.forEach((doc) => {
        clientData = { id: doc.id, ...doc.data() };
       });
+
+      sessionStorage.setItem('user', JSON.stringify(clientData))
       return String(clientData.uid);
     } catch (error) {
       console.error('Erro ao buscar cliente: ', error);

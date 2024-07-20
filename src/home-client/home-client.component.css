@@ -2,10 +2,9 @@ body {
   background-color: #292929;
   color: #fff;
   display: flex;
-  align-items: center;
   justify-content: center;
-  overflow: none;
 }
+
 header {
   color: #fff;
   padding: 20px;
@@ -40,87 +39,17 @@ header button[type="submit"] {
   cursor: pointer;
 }
 
-main {
-  padding: 20px;
-}
-
 section {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 20px;
-  flex: 1 0 0;
-  align-self: stretch;
 }
 
 ul {
+  display: flex;
+  flex-direction: column;
   list-style: none;
-  padding: 0;
-}
-
-.cabecalho-demanda {
-  align-items: flex-start;
-}
-
-.prioridade {
-  font-size: 14px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-
-.detalhes-demanda {
-  margin-top: 10px;
-}
-
-.detalhes-demanda p {
-  margin-bottom: 5px;
-}
-
-.acoes {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 5px;
-}
-
-.btn-orcamento {
-  display: flex;
-  width: 434px;
-  height: 42px;
-  padding: 8px 20px;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  border-style: none;
-  border-radius: 8px;
-  background: var(--lime-300, #bef264);
-  color: var(--lime-950, #1a2e05);
-  /* Button */
-  font-family: Inter;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-  letter-spacing: -0.32px;
-}
-.btn-excluir {
-  display: flex;
-  height: 42px;
-  padding: 8px 20px;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  border-radius: 8px;
-  background: #ff3d3d;
-  color: #ffffff;
-  color: var(--white, #fff);
-  border-style: none;
-  font-family: Inter;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-  letter-spacing: -0.32px;
+  gap: 24px;
 }
 
 li {
@@ -132,34 +61,95 @@ li {
     0px 2px 2px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 1px rgba(0, 0, 0, 0.1);
   background-color: #1c1c1c;
   display: flex;
-  padding: 10px 16px 20px;
+  padding: 24px;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   align-self: stretch;
   width: 900px;
   height: auto;
-  margin: 24px;
 }
 
-h2 {
-  color: var(--zinc-50, #fafafa);
+h3 {
+  color: #ffffff;
   font-family: Inter;
-  font-size: 32px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-  letter-spacing: -0.64px;
 }
 
-.nameClient {
-  color: var(--zinc-50, #fafafa);
+h4 {
+  margin: 0;
+}
+
+.prioridade {
+  font-size: 14px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.detalhes-demanda {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.detalhes-demanda p {
+  margin-bottom: 5px;
+}
+
+.acoes {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+}
+
+.btn-orcamento {
+  display: flex;
+  width: 434px;
+  height: 42px;
+  padding: 8px 20px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-style: none;
+  border-radius: 4px;
+  background:#bef264;
+  color: #1a2e05;
+  /* Button */
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.btn-excluir {
+  display: flex;
+  height: auto;
+  padding: 8px 20px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 4px;
+  background: #ff3d3d;
+  color: #ffffff;
+  border-style: none;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.name-client {
+  color: #ffffff;
   font-family: Inter;
   font-size: 20px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-  letter-spacing: -0.4px;
 }
 
 .container {
@@ -172,11 +162,6 @@ h2 {
   margin: 5px;
 }
 
-.demandas-em-aberto {
-  height: 100vh;
-  overflow-y: scroll;
-}
-
 .sidebar {
   display: flex;
   flex-direction: column;
@@ -185,25 +170,27 @@ h2 {
   align-self: stretch;
   padding: 40px 40px 0px 40px;
 }
-.Btt {
+
+.btn {
   display: flex;
   padding: 12px 0px 12px 12px;
   align-items: center;
   gap: 6px;
-  align-self: stretch;
   border-radius: 4px;
   width: 312px;
   height: 44px;
   background: #18181b;
   border-style: none;
   color: #ffff;
+  cursor:pointer;
 }
 
-.Btt.selected {
-  background-color: var(--lime-300, #bef264); /* Verde */
+#btn-task-open {
+  background: #bef264;
+  color: #1a2e05;
 }
 
-.BttCadastro {
+.btn-cadastro {
   display: flex;
   padding: 12px 20px;
   justify-content: center;
@@ -214,10 +201,11 @@ h2 {
   gap: 8px;
   align-self: stretch;
   border-radius: 4px;
-  background: var(--lime-300, #bef264);
+  background: #bef264;
+  cursor: pointer;
 }
 
-.textBttCadastro {
+.text-btn-cadastro {
   color: var(--lime-950, #1a2e05);
   /* Button */
   font-family: Inter;

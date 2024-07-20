@@ -7,7 +7,7 @@ import {
 } from '@angular/fire/firestore';
 import { ServiceRequest } from '../model/service_request.model';
 import { v4 as uuidv4 } from 'uuid';
-import { ClientService } from '../service/client.service';
+import { Client } from '../model/client.model';
 
 @Component({
   selector: 'app-registertask',
@@ -17,7 +17,9 @@ import { ClientService } from '../service/client.service';
 
 export class RegistertaskComponent {
   stateSelected: any = ''
-  client: any = this.clientService.getClientByEmail(String(sessionStorage.getItem('userEmail')))
+  activeIndexService: Set<number> = new Set()
+  activeIndexPriority: number | null = null
+  user: Client | null = null
 
   servicesTemplate: String[] = [
     'Carpinteiro', 'Eletricista', 'Pintor', 'Pedreiro', 'Mecânico','Encanador', 'Jardineiro',
@@ -33,7 +35,9 @@ export class RegistertaskComponent {
     'SE', 'SP', 'TO' 
 ]
 
-  constructor(private firestore: Firestore, private clientService: ClientService) {}
+  constructor(
+    private firestore: Firestore,
+  ) {}
 
   task: ServiceRequest = {
     uid: uuidv4(),
@@ -50,7 +54,20 @@ export class RegistertaskComponent {
     deletedAt: null,
   };
 
-  toggleSelectionService(value: string): void {
+  ngOnInit() {
+    const userString = sessionStorage.getItem('user')
+    if(userString) {
+      this.user = JSON.parse(userString) as Client;
+      this.task.clientId = this.user.uid
+    }
+  }
+
+  toggleSelectionService(value: string, index: number): void {
+    if (this.activeIndexService.has(index)) {
+      this.activeIndexService.delete(index);
+    } else {
+      this.activeIndexService.add(index);
+    }
     if(this.task.tagService.includes(value)) {
       this.task.tagService.splice(this.task.tagService.indexOf(value), 1)
     } else {
@@ -58,7 +75,13 @@ export class RegistertaskComponent {
     }
       console.log(this.task.tagService)
   }
-  toggleSelectionPriority(value: string): void {
+
+  isActive(index: number):boolean {
+    return this.activeIndexService.has(index)
+  }
+
+  toggleSelectionPriority(value: string, index: number): void {
+    this.activeIndexPriority = this.activeIndexPriority === index ? null : index;
     this.task.priority = ''
     this.task.priority = value
     console.log(this.task.priority)
@@ -70,12 +93,14 @@ export class RegistertaskComponent {
   }
 
   create() {
-    this.task.clientId = this.client.__zone_symbol__value.toString()
+    if(this.task.title === '' || this.task.description === '' || this.task.tagService.length === 0 || this.task.priority === '' || this.task.city === '' || this.task.state === '' || this.task.clientId === '') {
+      console.log(this.task)
+      return alert("Você precisa preencher todos os dados")
+    }
     const singupcollection = collection(this.firestore, 'tasks');
     addDoc(singupcollection, this.task)
       .then(() => {
-        console.log(this.task.clientId);
-        this.task;
+        console.log(this.task);
       })
       .catch((err) => {
         console.log(err);

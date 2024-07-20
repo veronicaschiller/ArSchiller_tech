@@ -1,24 +1,52 @@
 body {
+  padding: 40px;
   background-color: #292929;
   color: #fff;
   display: flex;
-  align-items: center;
   justify-content: center;
   overflow: none;
   height: 900px;
   width: auto;
+  gap: 56px;
 }
+
 select {
-  position: relative;
   top: 25px;
-  background: #e63936;
-  color: white;
+  background: #bef264;
+  color: #1a2e05;
   border: none;
   padding: 10px;
   box-shadow: 0 3px 2px rgba(0, 0, 0, 0.2);
-  width: 300px;
+  width: 200px;
   cursor: pointer;
   display: flex;
+  margin-bottom: 12px;
+}
+
+h4 {
+  margin: 0px;
+}
+
+label {
+  font-size: 20px;
+  color: white;
+  font-weight: bold;
+}
+
+li {
+  list-style-type: none;
+  display: flex;
+}
+
+input, textarea{
+  color: white;
+}
+
+.header { 
+  gap: 0px 12px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 28px;
 }
 
 .nameClient {
@@ -51,7 +79,6 @@ select {
   flex-direction: column;
   align-items: flex-start;
   gap: 24px;
-  padding: 40px 40px 0px 40px;
 }
 .Btt {
   display: flex;
@@ -65,10 +92,22 @@ select {
   background: #18181b;
   border-style: none;
   color: #ffff;
+  cursor: pointer;
+}
+
+.Btt:hover {
+  transition: 0.5s;
+  background: white;
+  color: #18181b;
+}
+
+.Btt:hover svg path {
+  transition: 0.5s;
+  stroke: #18181b;
 }
 
 .Btt.selected {
-  background-color: var(--lime-300, #bef264); /* Verde */
+  background-color: #bef264; 
 }
 
 .BttCadastro {
@@ -82,7 +121,8 @@ select {
   gap: 8px;
   align-self: stretch;
   border-radius: 4px;
-  background: var(--lime-300, #bef264);
+  background: #bef264;
+  cursor: pointer;
 }
 
 .textBttCadastro {
@@ -96,23 +136,13 @@ select {
   letter-spacing: -0.32px;
 }
 
-.container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
 .form-group {
   margin-bottom: 20px;
 }
 
-.label {
-  display: block;
-  margin-bottom: 5px;
-}
-
 .input-group {
   display: flex;
+  gap: 0px 40px;
 }
 
 .input-group .form-control {
@@ -121,15 +151,43 @@ select {
 }
 
 .btn {
-  margin-top: 20px;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
+  display: flex;
+  margin-top: 12px;
+  padding: 20px;
+  background-color: #bef264;
+  color: #1a2e05;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
+  align-items: center;
 }
 
 .btn:hover {
-  background-color: #0056b3;
+  background-color: #1a2e05;
+  color: white;
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.list-item {
+  padding: 10px 20px;
+  border-radius: 20px;
+  text-decoration: none;
+  color: white;
+  background-color: #666;
+  cursor: pointer;
+}
+.list-item:hover {
+  transition: 0.5s;
+  color: white;
+  background-color: #1a2e05
+}
+
+.active {
+  color: #1a2e05;
+  background-color: #bef264
 }

@@ -20,7 +20,8 @@ export class LoginClientComponent {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private authorizationService: AuthorizationService
+    private authorizationService: AuthorizationService,
+    private clientService: ClientService
   ) { }
 
   login() {
@@ -29,6 +30,7 @@ export class LoginClientComponent {
       .login(this.dataLogin.email, this.dataLogin.password)
       .then((UserCredential) => {
         if (UserCredential.user?.email) {
+          this.clientService.getClientByEmail(UserCredential.user.email)
           this.authorizationService.checkUserType(UserCredential.user.email)
             .subscribe(userType => {
               sessionStorage.setItem('userType', userType)
@@ -40,6 +42,9 @@ export class LoginClientComponent {
                 this.authorizationService.deslogar()
                 alert('Você precisa fazer o login como prestador de serviço!')
                 this.router.navigate(['/login']);
+              } else {
+                alert('Você não está cadastrado na nossa aplicação, por favor faça seu cadastro')
+                this.router.navigate(['/singup']);
               }
             })
         }

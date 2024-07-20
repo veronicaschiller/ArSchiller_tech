@@ -13,7 +13,7 @@ export class AuthService {
     try {
     return await this.afAuth.signInWithEmailAndPassword(email, password);
     } catch (error) {
-      console.error("Login error: ", error);
+      alert("E-mail e senha incorretos")
       throw error;
     }
   }

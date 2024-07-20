@@ -7,8 +7,7 @@ import {
 } from '@angular/fire/firestore';
 import { ServiceRequest } from '../model/service_request.model';
 import { v4 as uuidv4 } from 'uuid';
-import { ClientService } from '../service/client.service';
-import { Router } from '@angular/router';
+import { Client } from '../model/client.model';
 
 @Component({
   selector: 'app-registertask',
@@ -20,6 +19,7 @@ export class RegistertaskComponent {
   stateSelected: any = ''
   activeIndexService: Set<number> = new Set()
   activeIndexPriority: number | null = null
+  user: Client | null = null
 
   servicesTemplate: String[] = [
     'Carpinteiro', 'Eletricista', 'Pintor', 'Pedreiro', 'Mecânico','Encanador', 'Jardineiro',
@@ -47,12 +47,20 @@ export class RegistertaskComponent {
     priority: '',
     city: '',
     state: '',
-    clientId: String(sessionStorage.getItem('userId')),
+    clientId: '',
     isActived: true,
     createdAt: Timestamp.now(),
     updatedAt: Timestamp.now(),
     deletedAt: null,
   };
+
+  ngOnInit() {
+    const userString = sessionStorage.getItem('user')
+    if(userString) {
+      this.user = JSON.parse(userString) as Client;
+      this.task.clientId = this.user.uid
+    }
+  }
 
   toggleSelectionService(value: string, index: number): void {
     if (this.activeIndexService.has(index)) {
@@ -85,7 +93,7 @@ export class RegistertaskComponent {
   }
 
   create() {
-    if(this.task.title === '' || this.task.description === '' || this.task.tagService.length === 0 || this.task.priority === '' || this.task.city === '' || this.task.state === '') {
+    if(this.task.title === '' || this.task.description === '' || this.task.tagService.length === 0 || this.task.priority === '' || this.task.city === '' || this.task.state === '' || this.task.clientId === '') {
       console.log(this.task)
       return alert("Você precisa preencher todos os dados")
     }

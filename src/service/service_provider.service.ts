@@ -44,7 +44,7 @@ export class ServiceProviderService {
          providerData = { id: doc.id, ...doc.data() };
         });
         
-        sessionStorage.setItem('userId', String(providerData.uid))
+        sessionStorage.setItem('user', JSON.stringify(providerData))
         return String(providerData.uid);
       } catch (error) {
         console.error('Erro ao buscar prestador: ', error);

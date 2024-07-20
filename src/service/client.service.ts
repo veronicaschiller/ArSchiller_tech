@@ -43,7 +43,7 @@ export class ClientService {
        clientData = { id: doc.id, ...doc.data() };
       });
 
-      sessionStorage.setItem('userId', String(clientData.uid))
+      sessionStorage.setItem('user', JSON.stringify(clientData))
       return String(clientData.uid);
     } catch (error) {
       console.error('Erro ao buscar cliente: ', error);

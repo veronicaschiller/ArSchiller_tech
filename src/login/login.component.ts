@@ -35,7 +35,6 @@ export class LoginComponent {
             .subscribe(userType => {
               sessionStorage.setItem('userType', userType)
               if (userType === 'provider') {
-                sessionStorage.setItem('userEmail', String(UserCredential.user?.email))
                 this.router.navigate(['/home']);
               } else if (userType === 'client') {
                 this.authorizationService.deslogar()

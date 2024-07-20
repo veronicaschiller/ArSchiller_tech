@@ -35,7 +35,6 @@ export class LoginClientComponent {
             .subscribe(userType => {
               sessionStorage.setItem('userType', userType)
               if (userType === 'client') {
-                sessionStorage.setItem('userEmail', String(UserCredential.user?.email))
                 this.router.navigate(['/homeClient']);
               }
               else if (userType === 'provider') {

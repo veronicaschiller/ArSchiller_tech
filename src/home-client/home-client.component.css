@@ -92,11 +92,10 @@ h4 {
 }
 
 .demandas-em-aberto {
-  padding: 0 34px;
+  padding: 0 34px 0 0;
   height: 700px;
   overflow-y: scroll;
   overflow-x: hidden;
-  border-radius: 24px;
 }
 
 .demandas-em-aberto::-webkit-scrollbar {
@@ -198,6 +197,12 @@ h4 {
   width: 320px;
 }
 
+.sidebar p {
+  font-family: Inter;
+  text-transform: capitalize;
+  font-weight: 600;
+}
+
 .btn {
   display: flex;
   padding: 12px 0px 12px 12px;
@@ -210,6 +215,17 @@ h4 {
   border-style: none;
   color: #ffff;
   cursor:pointer;
+}
+
+.btn:hover { 
+  transition: 0.5s;
+  background: white;
+  color: #18181b;
+}
+
+.btn:hover svg path {
+  transition: 0.5s;
+  stroke: #18181b;
 }
 
 #btn-task-open {
@@ -230,6 +246,17 @@ h4 {
   border-radius: 4px;
   background: #bef264;
   cursor: pointer;
+}
+
+.btn-cadastro:hover {
+  transition: 0.3s;
+  background-color: #1a2e05;
+  color: white;
+}
+
+.btn-cadastro:hover svg path {
+  transition: 0.3s;
+  stroke: white;
 }
 
 .row {
@@ -260,7 +287,7 @@ h4 {
 }
 
 .text-btn-cadastro {
-  color: var(--lime-950, #1a2e05);
+  color: #1a2e05;
   /* Button */
   font-family: Inter;
   font-size: 16px;
@@ -268,6 +295,10 @@ h4 {
   font-weight: 500;
   line-height: normal;
   letter-spacing: -0.32px;
+}
+
+.btn-cadastro:hover .text-btn-cadastro {
+  color: white
 }
 
 @media (max-width: 800px) {

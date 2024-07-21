@@ -24,6 +24,7 @@
     "bcryptjs": "^2.4.3",
     "firebase": "^10.12.2",
     "jquery": "^3.7.1",
+    "lucide-angular": "^0.412.0",
     "materialize-css": "^1.0.0",
     "ngx-webstorage": "^18.0.0",
     "ngx-webstorage-service": "^5.0.0",

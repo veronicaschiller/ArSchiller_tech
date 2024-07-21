@@ -191,3 +191,12 @@ input, textarea{
   color: #1a2e05;
   background-color: #bef264
 }
+
+.back {
+  cursor: pointer;
+}
+
+.back:hover path{
+  transition: 0.3s;
+  stroke: #bef264
+}

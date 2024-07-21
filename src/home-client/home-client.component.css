@@ -91,6 +91,28 @@ h4 {
   border: 1px solid #ccc;
 }
 
+.demandas-em-aberto {
+  padding: 0 34px;
+  height: 700px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  border-radius: 24px;
+}
+
+.demandas-em-aberto::-webkit-scrollbar {
+  width: 28px;
+}
+
+.demandas-em-aberto::-webkit-scrollbar-track {
+  background: #18181b; 
+  border-radius: 34px; 
+}
+
+.demandas-em-aberto::-webkit-scrollbar-thumb {
+  background: #bef264;
+  border-radius: 34px;
+}
+
 .detalhes-demanda {
   width: 100%;
   margin-top: 10px;

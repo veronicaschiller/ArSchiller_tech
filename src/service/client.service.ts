@@ -13,7 +13,7 @@ export class ClientService {
   clientsRef: AngularFireList<any>
 
   constructor(private db: AngularFireDatabase) {
-    this.clientsRef = db.list(this.dbPath)
+    this.clientsRef = this.db.list(this.dbPath)
   }
 
   async signUp(data: Client): Promise<Client> {

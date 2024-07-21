@@ -32,4 +32,8 @@ export class HomeClientComponent implements OnInit{
   navigateToAbout(){
     this.router.navigate(['/registerTask']);
   }
+
+  toggleDeleteTask(uid: string) {
+    this.serviceRequestservice.deleteServiceRequestById(uid)
+  }
 }

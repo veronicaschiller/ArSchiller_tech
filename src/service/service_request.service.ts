@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ServiceRequest } from '../model/service_request.model';
 import { dbFirebase } from '../envitonments/environment';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
-import { collection, where, getDocs, query } from 'firebase/firestore';
+import { collection, where, getDocs, query, doc, deleteDoc } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +14,11 @@ export class ServiceReuqestService {
   serviceRequestRef: AngularFireList<any>
 
   constructor(private db: AngularFireDatabase) {
-    this.serviceRequestRef = db.list(this.dbPath)
+    this.serviceRequestRef = this.db.list(this.dbPath)
   }
 
   async createServiceRequest(data: ServiceRequest): Promise<ServiceRequest> {
-    const serviceRequest = new ServiceRequest (
+    const serviceRequest = new ServiceRequest(
       data.title,
       data.description,
       data.tagService,
@@ -37,7 +37,7 @@ export class ServiceReuqestService {
       const querySnapShot = await getDocs(q)
 
       if (querySnapShot.empty) {
-         throw new Error('Cliente não tem demandas')
+        throw new Error('Cliente não tem demandas')
       }
 
       let serviceRequestArray: ServiceRequest[] = [];
@@ -60,11 +60,37 @@ export class ServiceReuqestService {
           isActived: data['isActived'],
         }
 
-       serviceRequestArray.push(serviceRequestData);
+        serviceRequestArray.push(serviceRequestData);
       });
       return serviceRequestArray;
     } catch (error) {
       throw new Error('Erro ao buscas demandas')
+    }
+  }
+
+  async deleteServiceRequestById(uid: string) {
+    try {
+      const serviceRequest = collection(dbFirebase, this.dbPath)
+      const q = query(serviceRequest, where('uid', '==', uid))
+
+      const querySnapShot = await getDocs(q)
+
+      if (querySnapShot.empty) {
+        throw new Error('Sem demandas')
+      }
+      let id: string = ''
+      querySnapShot.forEach((doc) => {
+        const data = {id: doc.id, ...doc.data()}
+        id = data.id
+      })
+
+      const docRef = doc(dbFirebase, 'tasks', id)
+      await deleteDoc(docRef).then(() => {
+        alert(`Demanda Excluída com sucesso`)
+      })
+    
+    } catch (error) {
+      throw new Error(`Error message: ${error}`)
     }
   }
 }

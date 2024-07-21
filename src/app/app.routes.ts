@@ -8,6 +8,7 @@ import { LoginClientComponent } from './login-client/login-client.component';
 import { SingupProviderComponent } from '../singup_provider/singup-provider.component';
 import { RegistertaskComponent } from '../registertask/registertask.component';
 import { authorizationGuardClient,  authorizationGuardProvider} from './guard/authorization.guard';
+import { TaskQuotesComponent } from './task-quotes/task-quotes.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -18,6 +19,7 @@ export const routes: Routes = [
   {path:'singup-provider', component: SingupProviderComponent },
   { path: 'login', component: LoginComponent },
   { path: 'loginClient', component: LoginClientComponent },
+  { path: 'quotes/:taskId', component: TaskQuotesComponent, canActivate: [authorizationGuardClient]},
 ];
 
 @NgModule({

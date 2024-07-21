@@ -100,7 +100,7 @@
       </svg>
       <p>Demandas finalizadas</p>
     </button>
-    <button class="btn-cadastro" (click)="navigateToAbout()">
+    <button class="btn-cadastro" routerLink="/registerTask">
       <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">
         <path d="M4.66675 10H16.3334M10.5001 4.16669V15.8334" stroke="#1A2E05" stroke-width="1.25"
           stroke-linecap="round" stroke-linejoin="round" />
@@ -120,11 +120,14 @@
             </div>
           </div>
           <div class="detalhes-demanda">
-            <p><span-lucide name="flame" color="#bef264" class="my-icon"></span-lucide> <b> Prioridade: </b>{{task.priority}}</p>
-            <p><span-lucide name="map-pin" color="#bef264" class="my-icon"></span-lucide><b> Localização: </b> {{task.city}}, {{task.state}}</p>
-            <p><span-lucide name="clipboard-pen" color="#bef264" class="my-icon"></span-lucide><b> Descrição:</b> {{task.description}}</p>
+            <p><span-lucide name="flame" color="#bef264" class="my-icon"></span-lucide> <b> Prioridade:
+              </b>{{task.priority}}</p>
+            <p><span-lucide name="map-pin" color="#bef264" class="my-icon"></span-lucide><b> Localização: </b>
+              {{task.city}}, {{task.state}}</p>
+            <p><span-lucide name="clipboard-pen" color="#bef264" class="my-icon"></span-lucide><b> Descrição:</b>
+              {{task.description}}</p>
             <div class="acoes">
-              <button class="btn-orcamento">Orçamentos
+              <button class="btn-orcamento" (click)="seeQuotes(task.uid)">Orçamentos
                 <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">
                   <path d="M4.66675 9.99999H16.3334M16.3334 9.99999L10.5001 4.16666M16.3334 9.99999L10.5001 15.8333"
                     stroke="#1A2E05" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />

@@ -10,7 +10,7 @@ import { ServiceReuqestService } from '../service/service_request.service';
   styleUrl: './home-client.component.css',
 })
 
-export class HomeClientComponent implements OnInit{
+export class HomeClientComponent implements OnInit {
   user: Client | null = null
 
   serviceRequests: ServiceRequest[] | null = null
@@ -29,11 +29,13 @@ export class HomeClientComponent implements OnInit{
         this.serviceRequests = await this.serviceRequestservice.getServiceRequestByClientId(this.user.uid)
       }
   }
-  navigateToAbout(){
-    this.router.navigate(['/registerTask']);
-  }
 
   toggleDeleteTask(uid: string) {
     this.serviceRequestservice.deleteServiceRequestById(uid)
+    this.ngOnInit()
+  }
+
+  seeQuotes(uid: string) {
+    this.router.navigate([`/quotes/${uid}`])
   }
 }

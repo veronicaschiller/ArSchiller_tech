@@ -5,7 +5,7 @@ export class Quote {
     price!: number;
     serviceProviderId!: string;
     serviceRequestId!: string;
-    clientAccepted: boolean = false;
+    status: 'accepted' | 'refused' | '' = ''
     createdAt!: Timestamp
     updatedAt!: Timestamp
     deletedAt?: Timestamp | null
@@ -14,6 +14,7 @@ export class Quote {
         price: number,
         serviceProviderId: string,
         serviceRequestId: string,
+        status: string
 
     ) {
         this.price = price;

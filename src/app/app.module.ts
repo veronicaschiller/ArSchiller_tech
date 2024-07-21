@@ -16,7 +16,8 @@ import { SingupProviderComponent } from "../singup_provider/singup-provider.comp
 import { CommonModule } from "@angular/common";
 import { RegistertaskComponent } from "../registertask/registertask.component";
 import { AuthorizationService } from "../service/authorization.service";
-import { LucideAngularModule, Flame, MapPin, ClipboardPen} from 'lucide-angular';
+import { LucideAngularModule, Flame, MapPin, ClipboardPen, CircleDollarSign} from 'lucide-angular';
+import { TaskQuotesComponent } from "./task-quotes/task-quotes.component";
 
 @NgModule({
     declarations: [
@@ -27,7 +28,8 @@ import { LucideAngularModule, Flame, MapPin, ClipboardPen} from 'lucide-angular'
         HomeComponent,
         HomeClientComponent,
         LoginClientComponent,
-        RegistertaskComponent
+        RegistertaskComponent,
+        TaskQuotesComponent
     ],
     imports:[
         BrowserModule,
@@ -36,7 +38,7 @@ import { LucideAngularModule, Flame, MapPin, ClipboardPen} from 'lucide-angular'
         LoginModule,
         ReactiveFormsModule,
         AppRoutingModule,
-        LucideAngularModule.pick({Flame, MapPin, ClipboardPen})
+        LucideAngularModule.pick({Flame, MapPin, ClipboardPen, CircleDollarSign})
         
     ],
     providers:[   

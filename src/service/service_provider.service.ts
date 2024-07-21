@@ -51,4 +51,27 @@ export class ServiceProviderService {
         return null;
       }
     }
+
+    async getProviderById(uid: string) {
+      try {
+        const providers = collection(dbFirebase, this.dbPath)
+        const q = query(providers, where('uid', '==', uid))
+  
+        const querySnapShot = await getDocs(q)
+  
+        if (querySnapShot.empty) {
+          console.log('Prestador não existe');
+          return null;
+        }
+  
+        let providerData: any;
+        querySnapShot.forEach((doc) => {
+         providerData = { id: doc.id, ...doc.data() };
+        });
+        return providerData.name;
+      } catch (error) {
+        console.error('Erro ao buscar prestador: ', error);
+        return null;
+      }
+    }
 }

@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import firebase from 'firebase/compat/app';
 import { Quote } from '../model/quote.model';
-import { collection, getDocs, query, where } from 'firebase/firestore';
+import { collection, doc, getDocs, query, updateDoc, where } from 'firebase/firestore';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
 import { dbFirebase } from '../envitonments/environment';
 
@@ -60,5 +58,53 @@ export class QuoteService {
     } catch (error) {
       throw new Error(`Error ao encontrar a demanda: ${error}`)
     }
+  }
+
+  async updateQuoteAccepted(uid: string) {
+    const quote = collection(dbFirebase, this.dbPath)
+    const q = query(quote, where('uid', '==', uid))
+
+    const querySnapShot = await getDocs(q)
+
+    if (querySnapShot.empty) {
+      throw new Error('Orçamento não encontrado')
+    }
+    let id: string = ''
+    let quoteData: any
+    querySnapShot.forEach((doc) => {
+      const data = { id: doc.id, ...doc.data() }
+      quoteData = doc.data()
+      quoteData.status = 'accepted'
+      id = data.id
+    })
+
+    const docRef = doc(dbFirebase, 'quotes', id)
+    await updateDoc(docRef, quoteData).then(() => {
+      alert(`Demanda Alterada com sucesso`)
+    })
+  }
+
+  async updateQuoteRefused(uid: string) {
+    const quote = collection(dbFirebase, this.dbPath)
+    const q = query(quote, where('uid', '==', uid))
+
+    const querySnapShot = await getDocs(q)
+
+    if (querySnapShot.empty) {
+      throw new Error('Orçamento não encontrado')
+    }
+    let id: string = ''
+    let quoteData: any
+    querySnapShot.forEach((doc) => {
+      const data = { id: doc.id, ...doc.data() }
+      quoteData = doc.data()
+      quoteData.status = 'refused'
+      id = data.id
+    })
+
+    const docRef = doc(dbFirebase, 'quotes', id)
+    await updateDoc(docRef, quoteData).then(() => {
+      alert(`Demanda Alterada com sucesso`)
+    })
   }
 }

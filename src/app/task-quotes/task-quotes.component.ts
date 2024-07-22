@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ServiceReuqestService } from '../../service/service_request.service';
 import { ActivatedRoute } from '@angular/router';
 import { Client } from '../../model/client.model';
 import { QuoteService } from '../../service/quote.service';
@@ -34,17 +33,17 @@ providerNameString: String[] = []
       this.taskQuotes.map(async (quote: any) => {
         if(quote.serviceProviderId) {
           const nameProvider = await this.serviceProviderService.getProviderById(quote.serviceProviderId)
-          this.providerNameString.push(nameProvider)
+          this.providerNameString.push(nameProvider.name)
         }
       })
   }
 
-  toggleRefuseQuote(uid: string) {
-    
+  async toggleRefuseQuote(uid: string) {
+    await this.quoteService.updateQuoteRefused(uid)
   }
 
-  toggleAcceptQuote(uid: string) {
-    
+  async toggleAcceptQuote(uid: string) {
+    await this.quoteService.updateQuoteAccepted(uid)
   }
 
   formatedPrice(price: number): String {

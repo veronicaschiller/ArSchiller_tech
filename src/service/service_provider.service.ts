@@ -68,7 +68,8 @@ export class ServiceProviderService {
         querySnapShot.forEach((doc) => {
          providerData = { id: doc.id, ...doc.data() };
         });
-        return providerData.name;
+        
+        return providerData;
       } catch (error) {
         console.error('Erro ao buscar prestador: ', error);
         return null;

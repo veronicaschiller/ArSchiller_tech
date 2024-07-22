@@ -9,7 +9,6 @@ import { collection, where, getDocs, query, doc, deleteDoc } from 'firebase/fire
 })
 
 export class ServiceReuqestService {
-
   private dbPath = '/tasks'
   serviceRequestRef: AngularFireList<any>
 

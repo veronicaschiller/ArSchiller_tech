@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Client } from '../../model/client.model';
 import { QuoteService } from '../../service/quote.service';
 import { ServiceProviderService } from '../../service/service_provider.service';
+import { ServiceProvider } from '../../model/service_provider.model';
 
 
 @Component({
@@ -11,10 +12,10 @@ import { ServiceProviderService } from '../../service/service_provider.service';
   styleUrl: './task-quotes.component.css'
 })
 
-export class TaskQuotesComponent implements OnInit{
+export class TaskQuotesComponent implements OnInit {
 taskQuotes: any
 taskId: string = ''
-user: Client | null = null
+user: Client | ServiceProvider | null = null
 providerNameString: String[] = []
 
   constructor(

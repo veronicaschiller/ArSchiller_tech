@@ -9,15 +9,15 @@ import { getFirestore } from "firebase/firestore";
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 export const environment = {
     production: false,
-    firebase:{
-        apiKey: "AIzaSyCFnq25xcEEb4J9MQAy2I7Jqui3bjJCSgY",
-  authDomain: "arschiller-servisse.firebaseapp.com",
-  databaseURL: "https://arschiller-servisse-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "arschiller-servisse",
-  storageBucket: "arschiller-servisse.appspot.com",
-  messagingSenderId: "261608255659",
-  appId: "1:261608255659:web:5261995a64337462a707ee",
-  measurementId: "G-NCN573N8PQ"}
+    firebase: {
+        apiKey: "AIzaSyBTHXjum0MG--AsAoXo4A3fLFn4e-kID3Y",
+        authDomain: "ar-tech-schiller.firebaseapp.com",
+        projectId: "ar-tech-schiller",
+        storageBucket: "ar-tech-schiller.appspot.com",
+        messagingSenderId: "384990249191",
+        appId: "1:384990249191:web:c8e5b06137bbd726d52242",
+        measurementId: "G-ZZ8BCP7ZB0"
+    }
     }
 
 // Initialize Firebase

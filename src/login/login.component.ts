@@ -35,7 +35,7 @@ export class LoginComponent {
             .subscribe(userType => {
               sessionStorage.setItem('userType', userType)
               if (userType === 'provider') {
-                this.router.navigate(['/home']);
+                this.router.navigate(['/homeprovider']);
               } else if (userType === 'client') {
                 this.authorizationService.deslogar()
                 alert('Você precisa fazer o login como cliente!')

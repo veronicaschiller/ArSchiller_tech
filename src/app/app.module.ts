@@ -18,6 +18,8 @@ import { RegistertaskComponent } from "../registertask/registertask.component";
 import { AuthorizationService } from "../service/authorization.service";
 import { LucideAngularModule, Flame, MapPin, ClipboardPen, CircleDollarSign} from 'lucide-angular';
 import { TaskQuotesComponent } from "./task-quotes/task-quotes.component";
+import { HomeProviderComponent } from "../home-provider/home-provider.component";
+import { OpenTaskProvidersComponent } from "../open-task-providers/open-task-providers.component";
 
 @NgModule({
     declarations: [
@@ -29,7 +31,9 @@ import { TaskQuotesComponent } from "./task-quotes/task-quotes.component";
         HomeClientComponent,
         LoginClientComponent,
         RegistertaskComponent,
-        TaskQuotesComponent
+        TaskQuotesComponent,
+        HomeProviderComponent,
+        OpenTaskProvidersComponent
     ],
     imports:[
         BrowserModule,

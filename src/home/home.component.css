@@ -24,7 +24,6 @@ body {
       left: 711px;
       gap: 48px;
       opacity: 0px;
-      
   }
   
   h1 {
@@ -41,8 +40,7 @@ body {
       height: 42px;
       padding: 8px 20px 8px 20px;
       border-radius:8px;
-      
-  }
+}
   
   strong {
     font-family: Inter;
@@ -56,12 +54,14 @@ body {
   button.client {
     background-color: #BEF264;
     color: #000;
+    border-style: none;
   }
   
   button.provider {
     background-color: #2a2a2a;
     color: #fff;
     border: 1px solid #BEF264;
+
   }
   
   /* Adicionando estilo à imagem e ao fundo */

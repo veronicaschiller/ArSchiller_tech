@@ -63,7 +63,70 @@ export class ServiceReuqestService {
       });
       return serviceRequestArray;
     } catch (error) {
-      throw new Error('Erro ao buscas demandas')
+      throw new Error('Erro ao buscar demandas')
+    }
+  }
+
+  async getServiceRequestByServiceProviderServices(services: String[]): Promise<ServiceRequest[]> {
+    try {
+      let serviceRequestArray: ServiceRequest[] = [];
+      const serviceRequest = collection(dbFirebase, this.dbPath)
+      const q = query(
+        serviceRequest, 
+        where('tagService', 'array-contains-any', services),
+        where('isActived', '==', true)
+      )
+
+      const querySnapShot = await getDocs(q)
+      if (querySnapShot.empty) {
+       console.log('Não há demandas para este prestador')
+      }
+
+      querySnapShot.forEach((doc) => {
+        const data = doc.data()
+        const serviceRequestData: ServiceRequest = {
+          uid: data['uid'],
+          title: data['title'],
+          description: data['description'],
+          tagService: data['tagService'],
+          priority: data['priority'],
+          clientId: data['clientId'],
+          serviceProviderId: data['serviceProviderId'],
+          city: data['city'],
+          state: data['state'],
+          createdAt: data['createdAt'],
+          updatedAt: data['updatedAt'],
+          deletedAt: data['deletedAt'],
+          quotes: data['quotes'],
+          isActived: data['isActived'],
+        }
+        serviceRequestArray.push(serviceRequestData);
+      });
+      return serviceRequestArray;
+    } catch (error) {
+      throw new Error('Erro ao buscar demandas')
+    }
+  }
+
+  async getServiceRequestById(uid: string) {
+    try {
+      const serviceRequest = collection(dbFirebase, this.dbPath)
+      const q = query(serviceRequest, where('uid', '==', uid))
+
+      const querySnapShot = await getDocs(q)
+
+      if (querySnapShot.empty) {
+        console.log('Demanda não existe');
+      }
+
+      let serviceRequestData: any;
+      querySnapShot.forEach((doc) => {
+       serviceRequestData = { id: doc.id, ...doc.data() };
+      });
+      
+      return serviceRequestData
+    } catch (error) {
+      throw new Error(`Erro ao buscar demanda: ${error}` );
     }
   }
 
@@ -75,7 +138,7 @@ export class ServiceReuqestService {
       const querySnapShot = await getDocs(q)
 
       if (querySnapShot.empty) {
-        throw new Error('Sem demandas')
+        console.log('Sem demandas')
       }
       let id: string = ''
       querySnapShot.forEach((doc) => {

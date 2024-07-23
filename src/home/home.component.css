@@ -15,14 +15,15 @@ body {
   }
   
   .content {
-    max-width: 800px;
+    width: 100%;
   }
+
   .contentBotton {
-      width: 618px;
-      height: 42px;
+    display: flex;
+      width: 100%;
       top: 687px;
       left: 711px;
-      gap: 48px;
+      gap: 128px;
       opacity: 0px;
   }
   
@@ -40,6 +41,7 @@ body {
       height: 42px;
       padding: 8px 20px 8px 20px;
       border-radius:8px;
+      cursor: pointer;
 }
   
   strong {
@@ -52,12 +54,14 @@ body {
   }
   
   button.client {
+    width: 100%;
     background-color: #BEF264;
     color: #000;
     border-style: none;
   }
   
   button.provider {
+    width: 100%;
     background-color: #2a2a2a;
     color: #fff;
     border: 1px solid #BEF264;

@@ -16,7 +16,7 @@ import { SingupProviderComponent } from "../singup_provider/singup-provider.comp
 import { CommonModule } from "@angular/common";
 import { RegistertaskComponent } from "../registertask/registertask.component";
 import { AuthorizationService } from "../service/authorization.service";
-import { LucideAngularModule, Flame, MapPin, ClipboardPen, CircleDollarSign} from 'lucide-angular';
+import { LucideAngularModule, Flame, MapPin, ClipboardPen, CircleDollarSign, MoveRight, CircleArrowLeft} from 'lucide-angular';
 import { TaskQuotesComponent } from "./task-quotes/task-quotes.component";
 import { HomeProviderComponent } from "../home-provider/home-provider.component";
 import { OpenTaskProvidersComponent } from "../open-task-providers/open-task-providers.component";
@@ -42,7 +42,7 @@ import { OpenTaskProvidersComponent } from "../open-task-providers/open-task-pro
         LoginModule,
         ReactiveFormsModule,
         AppRoutingModule,
-        LucideAngularModule.pick({Flame, MapPin, ClipboardPen, CircleDollarSign})
+        LucideAngularModule.pick({Flame, MapPin, ClipboardPen, CircleDollarSign, MoveRight, CircleArrowLeft})
         
     ],
     providers:[   

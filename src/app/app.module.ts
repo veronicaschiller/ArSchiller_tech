@@ -22,6 +22,7 @@ import { HomeProviderComponent } from "../home-provider/home-provider.component"
 import { OpenTaskProvidersComponent } from "../open-task-providers/open-task-providers.component";
 import { CreateQuotesProviderComponent } from "../create-quotes-provider/create-quotes-provider.component";
 import { TaskQuotesProviderComponent } from "./task-quotes-provider/task-quotes-provider.component";
+import { AceptQuotesProviderComponent } from "../acept-quotes-provider/acept-quotes-provider.component";
 
 @NgModule({
     declarations: [
@@ -37,7 +38,8 @@ import { TaskQuotesProviderComponent } from "./task-quotes-provider/task-quotes-
         HomeProviderComponent,
         OpenTaskProvidersComponent,
         CreateQuotesProviderComponent,
-        TaskQuotesProviderComponent
+        TaskQuotesProviderComponent,
+        AceptQuotesProviderComponent
     ],
     imports:[
         BrowserModule,

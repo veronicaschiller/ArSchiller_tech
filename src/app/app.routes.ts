@@ -13,6 +13,7 @@ import { HomeProviderComponent } from '../home-provider/home-provider.component'
 import { OpenTaskProvidersComponent } from '../open-task-providers/open-task-providers.component';
 import { CreateQuotesProviderComponent } from '../create-quotes-provider/create-quotes-provider.component';
 import { TaskQuotesProviderComponent } from './task-quotes-provider/task-quotes-provider.component';
+import { AceptQuotesProviderComponent } from '../acept-quotes-provider/acept-quotes-provider.component';
 
 export const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -28,6 +29,7 @@ export const routes: Routes = [
   {path:'homeprovider', component:HomeProviderComponent, canActivate:[authorizationGuardProvider]},
   {path:'providerOpenTask', component:OpenTaskProvidersComponent, canActivate:[authorizationGuardProvider]},
   {path:'create-quote', component:CreateQuotesProviderComponent, canActivate:[authorizationGuardProvider]},
+  {path:'acept-quotes', component:AceptQuotesProviderComponent, canActivate:[authorizationGuardProvider]},
 ];
 
 @NgModule({

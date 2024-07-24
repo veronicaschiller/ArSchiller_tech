@@ -126,7 +126,7 @@
         />
       </svg>
       <p class="name-client">{{this.provider?.name}}</p>
-      <button class="btn" id="btn-task-open">
+      <button class="btn" id="btn-task-open" >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="20"
@@ -137,7 +137,7 @@
           <g clip-path="url(#clip0_1_1367)">
             <path
               d="M10.0001 18.3333C14.6025 18.3333 18.3334 14.6024 18.3334 9.99999C18.3334 5.39762 14.6025 1.66666 10.0001 1.66666C5.39771 1.66666 1.66675 5.39762 1.66675 9.99999C1.66675 14.6024 5.39771 18.3333 10.0001 18.3333Z"
-              stroke="#1a2e05"
+              stroke="#BEF264"
               stroke-width="2.5"
               stroke-linecap="round"
               stroke-linejoin="round"
@@ -185,7 +185,7 @@
           <g clip-path="url(#clip0_1_1377)">
             <path
               d="M18.3334 9.23333V10C18.3324 11.797 17.7505 13.5456 16.6745 14.9849C15.5986 16.4241 14.0862 17.4771 12.3629 17.9866C10.6396 18.4961 8.7978 18.4349 7.11214 17.8122C5.42648 17.1894 3.98729 16.0384 3.00922 14.5309C2.03114 13.0234 1.56657 11.2401 1.68481 9.44693C1.80305 7.6538 2.49775 5.94694 3.66531 4.58089C4.83288 3.21485 6.41074 2.26282 8.16357 1.86679C9.91641 1.47076 11.7503 1.65195 13.3918 2.38333M7.50009 9.16667L10.0001 11.6667L18.3334 3.33333"
-              stroke="#BEF264"
+              stroke="#1a2e05"
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
@@ -204,25 +204,43 @@
       <p class="title-button">Lista de Demandas</p>
 
       <button class="btn-Demandas" routerLink="/providerOpenTask">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="21"
-          height="20"
-          viewBox="0 0 21 20"
-          fill="none"
-        >
-          <path
-            d="M4.66675 10H16.3334M10.5001 4.16669V15.8334"
-            stroke="#1A2E05"
-            stroke-width="1.25"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
         <p class="text-btn-cadastro">Demandas em aberto</p>
       </button>
     </div>
     </div>
-    <h3></h3> 
+    <main class="container-md">
+      <h3>Orçamentos finalizados</h3>
+        <section class="demandas-em-aberto">
+          <ul>
+            <li *ngFor="let quote of this.quotesIt">
+              <div class="row">
+                <h4>{{ quote.serviceRequest.title }}</h4>
+                <div class="services">
+                  <a *ngFor="let service of quote.serviceRequest.tagService">{{service}}</a>
+                </div>
+              </div>
+              <div class="detalhes-demanda">
+                <p><i-lucide name="flame" color="#bef264" class="my-icon"></i-lucide> <b> Prioridade:
+                  </b>{{quote.serviceRequest.priority}}</p>
+                <p><i-lucide name="map-pin" color="#bef264" class="my-icon"></i-lucide><b> Localização: </b>
+                  {{quote.serviceRequest.city}}, {{quote.serviceRequest.state}}</p>
+                <p><i-lucide name="clipboard-pen" color="#bef264" class="my-icon"></i-lucide><b> Descrição:</b>
+                  {{quote.serviceRequest.description}}</p>
+                <div class="acoes">
+                  <div class="row">
+                    <div class="column">
+                      <h5>Seu orçamento</h5>
+                      <div class="row-2">
+                        <i-lucide name="CircleDollarSign" color="#bef264" class="my-icon"></i-lucide>
+                        <p><b>Preço: </b>{{formatedPrice(quote.price)}}</p>
+                      </div>
+                    </div>   
+                </div>
+              </div>
+              </div>
+            </li>
+          </ul>
+      </section>
+    </main>
   </body>
 </html>

@@ -27,7 +27,6 @@ export class FinishQuotesProviderComponent {
   quotesService: Quote[] | null = [];
   quotesIt: QuoteIt[] | null = [];
   serviceRequests: ServiceRequest[] | null = [];
-  selectButton:string = 'open'
 
   constructor(
     private serviceQuotes: QuoteService,
@@ -79,16 +78,4 @@ export class FinishQuotesProviderComponent {
     });
     return real
   }
-
-  // função para quando selecionar o botão ele ficar ativo e os outros inativos 
-  selecteButton(button:string){
-    this.selectButton = button;
-  }
-  // função que deve se aplicada no botão
-  // <button 
-  //   [class.selected]="selectedButton === 'aberto'"
-  //   (click)="selectButton('aberto')">
-  //   Orçamentos Em Aberto
-  // </button>
-
 }

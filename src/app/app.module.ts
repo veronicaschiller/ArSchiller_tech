@@ -21,6 +21,7 @@ import { TaskQuotesComponent } from "./task-quotes/task-quotes.component";
 import { HomeProviderComponent } from "../home-provider/home-provider.component";
 import { OpenTaskProvidersComponent } from "../open-task-providers/open-task-providers.component";
 import { CreateQuotesProviderComponent } from "../create-quotes-provider/create-quotes-provider.component";
+import { TaskQuotesProviderComponent } from "./task-quotes-provider/task-quotes-provider.component";
 
 @NgModule({
     declarations: [
@@ -35,7 +36,8 @@ import { CreateQuotesProviderComponent } from "../create-quotes-provider/create-
         TaskQuotesComponent,
         HomeProviderComponent,
         OpenTaskProvidersComponent,
-        CreateQuotesProviderComponent
+        CreateQuotesProviderComponent,
+        TaskQuotesProviderComponent
     ],
     imports:[
         BrowserModule,

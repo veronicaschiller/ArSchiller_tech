@@ -64,7 +64,7 @@ export class OpenTaskProvidersComponent {
   }
 
   seeQuotes(uid: string) {
-    this.router.navigate([`/quotes/${uid}`]);
+    this.router.navigate([`/quotes/provider/${uid}`]);
   }
 
   toogleDiv(uid: string) {

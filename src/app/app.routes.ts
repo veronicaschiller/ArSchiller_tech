@@ -12,6 +12,7 @@ import { TaskQuotesComponent } from './task-quotes/task-quotes.component';
 import { HomeProviderComponent } from '../home-provider/home-provider.component';
 import { OpenTaskProvidersComponent } from '../open-task-providers/open-task-providers.component';
 import { CreateQuotesProviderComponent } from '../create-quotes-provider/create-quotes-provider.component';
+import { TaskQuotesProviderComponent } from './task-quotes-provider/task-quotes-provider.component';
 
 export const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -22,7 +23,8 @@ export const routes: Routes = [
   {path:'singup-provider', component: SingupProviderComponent},
   {path: 'login', component: LoginComponent},
   {path: 'loginClient', component: LoginClientComponent},
-  {path: 'quotes/:taskId', component: TaskQuotesComponent, canActivate:[authorizationGuardProvider, authorizationGuardProvider]},
+  {path: 'quotes/:taskId', component: TaskQuotesComponent, canActivate:[authorizationGuardClient]},
+  {path: 'quotes/provider/:taskId', component: TaskQuotesProviderComponent, canActivate:[authorizationGuardProvider]},
   {path:'homeprovider', component:HomeProviderComponent, canActivate:[authorizationGuardProvider]},
   {path:'providerOpenTask', component:OpenTaskProvidersComponent, canActivate:[authorizationGuardProvider]},
   {path:'create-quote', component:CreateQuotesProviderComponent, canActivate:[authorizationGuardProvider]},

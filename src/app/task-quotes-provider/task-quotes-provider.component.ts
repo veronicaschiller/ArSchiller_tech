@@ -1,19 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component } from '@angular/core';
 import { Client } from '../../model/client.model';
-import { QuoteService } from '../../service/quote.service';
-import { ServiceProviderService } from '../../service/service_provider.service';
 import { ServiceProvider } from '../../model/service_provider.model';
-
+import { ServiceProviderService } from '../../service/service_provider.service';
+import { QuoteService } from '../../service/quote.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-task-quotes',
-  templateUrl: './task-quotes.component.html',
-  styleUrl: './task-quotes.component.css'
+  selector: 'app-task-quotes-provider',
+  templateUrl: './task-quotes-provider.component.html',
+  styleUrl: './task-quotes-provider.component.css'
 })
-
-export class TaskQuotesComponent implements OnInit {
-taskQuotes: any
+export class TaskQuotesProviderComponent {
+  taskQuotes: any
 taskId: string = ''
 user: Client | ServiceProvider | null = null
 providerNameString: String[] = []

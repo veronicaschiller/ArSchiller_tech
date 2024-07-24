@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="task-quotes.component.css" />
+    <link rel="stylesheet" href="task-quotes-provider.component.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet" />
@@ -59,7 +59,7 @@
                 fill="#1A2E05" />
         </svg>
         <p class="name-client">{{ user?.name}}</p>
-        <button class="btn" id="btn-task-open" routerLink="/homeClient">
+        <button class="btn" id="btn-task-open" routerLink="/homeprovider">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                 <g clip-path="url(#clip0_1_1367)">
                     <path
@@ -72,7 +72,7 @@
                     </clipPath>
                 </defs>
             </svg>
-            <p>Demandas em aberto</p>
+            <p>Orçamentos em aberto</p>
         </button>
         <button class="btn" id="btn-task-close">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
@@ -85,7 +85,7 @@
                 <path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3" />
                 <path d="M3 4h8" />
             </svg>
-            <p>Demandas fechadas</p>
+            <p>Orçamentos fechados</p>
         </button>
         <button class="btn" id="btn-task-completed">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -100,14 +100,10 @@
                     </clipPath>
                 </defs>
             </svg>
-            <p>Demandas finalizadas</p>
+            <p>Orçamentos finalizados</p>
         </button>
-        <button class="btn-cadastro" routerLink="/registerTask">
-            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">
-                <path d="M4.66675 10H16.3334M10.5001 4.16669V15.8334" stroke="#1A2E05" stroke-width="1.25"
-                    stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-            <p class="text-btn-cadastro">Cadastrar demanda</p>
+        <button class="btn-cadastro" routerLink="/providerOpenTask">
+            <p class="text-btn-cadastro">Demandas em aberto</p>
         </button>
     </div>
     <main class="container">
@@ -118,14 +114,6 @@
                     <h4>{{this.providerNameString[i]}}</h4>
                     <div class="detalhes-demanda">
                         <p class="price"><i-lucide name="circle-dollar-sign" color="#bef264" class="my-icon"></i-lucide><b>Preço do orçamento:</b>{{formatedPrice(quote.price)}}</p>
-                        <div class="acoes">
-                            <button class="btn-recusar-orcamento" (click)="toggleRefuseQuote(quote.uid)">Recusar
-                                orçamento
-                            </button>
-                            <button class="btn-aceitar-orcamento" (click)="toggleAcceptQuote(quote.uid)">
-                                <span>Aceitar orçamento</span>
-                            </button>
-                        </div>
                     </div>
                 </li>
             </ul>

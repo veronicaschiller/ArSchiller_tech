@@ -117,6 +117,7 @@
     <section class="demandas-em-aberto">
       <ul>
         <li *ngFor="let task of this.serviceRequests">
+          <div class="for">
           <div class="row">
             <h4>{{ task.title }}</h4>
             <div class="services">
@@ -136,20 +137,24 @@
               <span-lucide name="clipboard-pen" color="#bef264" class="my-icon"></span-lucide><b> Descrição:</b>
               {{task.description}}
             </p>
-            <div class="acoes">
+          </div>
+            <div class="acoes" *ngIf="!switchContent[task.uid]">
               <button class="btn-orcamento" (click)="seeQuotes(task.uid)">Orçamentos
-                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">
-                  <path d="M4.66675 9.99999H16.3334M16.3334 9.99999L10.5001 4.16666M16.3334 9.99999L10.5001 15.8333"
-                    stroke="#1A2E05" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
+                <i-lucide name="move-right" color="white" class="my-icon"></i-lucide>
               </button>
-              <button class="btn-excluir">
-                <span>Excluir Demanda</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                  <path
-                    d="M2.5 4.99999H17.5M15.8333 4.99999V16.6667C15.8333 17.5 15 18.3333 14.1667 18.3333H5.83333C5 18.3333 4.16667 17.5 4.16667 16.6667V4.99999M6.66667 4.99999V3.33332C6.66667 2.49999 7.5 1.66666 8.33333 1.66666H11.6667C12.5 1.66666 13.3333 2.49999 13.3333 3.33332V4.99999M8.33333 9.16666V14.1667M11.6667 9.16666V14.1667"
-                    stroke="white" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
+              <button class="btn-add-orcamento" (click)="toogleDiv(task.uid)">
+                Adicionar orçamento
+                <i-lucide name="plus" color="#1a2e05" class="my-icon"></i-lucide>
+              </button>
+            </div>
+            <div class="acoes_2" *ngIf="switchContent[task.uid]">
+              <div class="input-group text-light">
+                <i-lucide name="circle-dollar-sign" color="#A1A1AA" class="my-icon"></i-lucide> 
+                <input type="text" id="text" class="form-control" aria-label="Amount (to the nearest dollar)" placeholder="Digite seu preço" [(ngModel)]="this.price">
+              </div>
+              <button class="btn-orcamento-2" (click)="createQuote(task.uid)">Confirmar orçamento</button>
+              <button class="btn-excluir" (click)="toogleDiv(task.uid)">
+                Desistir
               </button>
             </div>
           </div>

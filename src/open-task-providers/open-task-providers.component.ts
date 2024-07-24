@@ -12,23 +12,25 @@ interface QuoteIt {
   price: number;
   serviceProviderId: string;
   serviceRequestId: string;
-  status: 'accepted' | 'refused' | ''
-  createdAt: Timestamp
-  updatedAt: Timestamp
-  deletedAt?: Timestamp | null
-  serviceRequest: ServiceRequest
+  status: 'accepted' | 'refused' | '';
+  createdAt: Timestamp;
+  updatedAt: Timestamp;
+  deletedAt?: Timestamp | null;
+  serviceRequest: ServiceRequest;
 }
 @Component({
   selector: 'app-open-task-providers',
   templateUrl: './open-task-providers.component.html',
-  styleUrl: './open-task-providers.component.css'
+  styleUrl: './open-task-providers.component.css',
 })
 export class OpenTaskProvidersComponent {
   provider: ServiceProvider | null = null;
   quotesService: Quote[] | null = null;
   quotesIt: QuoteIt[] | null = null;
-  quoteIt: QuoteIt[] | null = null
+  quoteIt: QuoteIt[] | null = null;
   serviceRequests: ServiceRequest[] | null = null;
+  switchContent:{[key: string]: boolean} = {}
+  price: number = 0;
 
   constructor(
     private router: Router,
@@ -42,7 +44,10 @@ export class OpenTaskProvidersComponent {
       this.provider = JSON.parse(providerString);
     }
     if (this.provider) {
-      this.serviceRequests = await this.serviceRequestService.getServiceRequestByServiceProviderServices(this.provider.services);
+      this.serviceRequests =
+        await this.serviceRequestService.getServiceRequestByServiceProviderServices(
+          this.provider.services
+        );
     }
   }
 
@@ -59,6 +64,26 @@ export class OpenTaskProvidersComponent {
   }
 
   seeQuotes(uid: string) {
-    this.router.navigate([`/quotes/${uid}`])
+    this.router.navigate([`/quotes/${uid}`]);
+  }
+
+  toogleDiv(uid: string) {
+    this.switchContent[uid] = !this.switchContent[uid];
+  }
+
+  async createQuote(serviceId: string) {
+    if (serviceId) {
+      if (this.provider) {
+        const quote = new Quote(
+          this.price,
+          this.provider.uid,
+          serviceId,
+          ''
+        );
+        await this.serviceQuotes.createQuote(quote)
+      }
+    }
+    this.switchContent[serviceId] = !this.switchContent[serviceId];
+    this.ngOnInit()
   }
 }

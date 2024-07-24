@@ -31,12 +31,6 @@ providerNameString: String[] = []
       if(userString) {
         this.user = JSON.parse(userString)
       }
-      this.taskQuotes.map(async (quote: any) => {
-        if(quote.serviceProviderId) {
-          const nameProvider = await this.serviceProviderService.getProviderById(quote.serviceProviderId)
-          this.providerNameString.push(nameProvider.name)
-        }
-      })
   }
 
   async toggleRefuseQuote(uid: string) {
@@ -53,4 +47,9 @@ providerNameString: String[] = []
       currency: 'BRL'
     })
   }
+
+  async getProviderName(uid: string) { 
+        const provider = await this.serviceProviderService.getProviderById(uid)
+        return provider.name
+      }
 }

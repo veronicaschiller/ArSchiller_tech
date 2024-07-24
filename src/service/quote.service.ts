@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Quote } from '../model/quote.model';
-import { collection, deleteDoc, doc, getDocs, query, updateDoc, where } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDocs, query, updateDoc, where } from 'firebase/firestore';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
 import { dbFirebase } from '../envitonments/environment';
 
@@ -16,14 +16,23 @@ export class QuoteService {
     this.serviceRequestRef = this.db.list(this.dbPath)
   }
 
-  async createQuote(data: Quote): Promise<Quote> {
-    const quote = new Quote(
-      data.price,
-      data.serviceProviderId,
-      data.serviceRequestId,
-      data.status
-    )
-    return quote
+  async createQuote(data: Quote): Promise<Object> {
+    const quote = {
+      price: Number(data.price),
+      serviceProviderId: data.serviceProviderId,
+      serviceRequestId: data.serviceRequestId,
+      status: data.status
+    }
+    
+    const quoteDoc = collection(dbFirebase, this.dbPath);
+    addDoc(quoteDoc, quote)
+      .then(() => {
+        console.log(quote);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+      return quote
   }
 
   async getQuotesByServiceRequestId(uid: string) {

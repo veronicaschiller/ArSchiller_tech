@@ -11,19 +11,21 @@ import { authorizationGuardClient,  authorizationGuardProvider} from './guard/au
 import { TaskQuotesComponent } from './task-quotes/task-quotes.component';
 import { HomeProviderComponent } from '../home-provider/home-provider.component';
 import { OpenTaskProvidersComponent } from '../open-task-providers/open-task-providers.component';
+import { CreateQuotesProviderComponent } from '../create-quotes-provider/create-quotes-provider.component';
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'registerTask', component: RegistertaskComponent, canActivate: [authorizationGuardClient]},
-  { path: 'homeClient', component: HomeClientComponent, canActivate: [authorizationGuardClient]},
-  { path: 'home', component: HomeComponent },
-  { path: 'singup', component: SingupComponent },
-  {path:'singup-provider', component: SingupProviderComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'loginClient', component: LoginClientComponent },
-  { path: 'quotes/:taskId', component: TaskQuotesComponent, canActivate:[authorizationGuardProvider, authorizationGuardProvider] },
+  {path: '', component: HomeComponent},
+  {path: 'registerTask', component: RegistertaskComponent, canActivate: [authorizationGuardClient]},
+  {path: 'homeClient', component: HomeClientComponent, canActivate: [authorizationGuardClient]},
+  {path: 'home', component: HomeComponent},
+  {path: 'singup', component: SingupComponent},
+  {path:'singup-provider', component: SingupProviderComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'loginClient', component: LoginClientComponent},
+  {path: 'quotes/:taskId', component: TaskQuotesComponent, canActivate:[authorizationGuardProvider, authorizationGuardProvider]},
   {path:'homeprovider', component:HomeProviderComponent, canActivate:[authorizationGuardProvider]},
   {path:'providerOpenTask', component:OpenTaskProvidersComponent, canActivate:[authorizationGuardProvider]},
+  {path:'create-quote', component:CreateQuotesProviderComponent, canActivate:[authorizationGuardProvider]},
 ];
 
 @NgModule({

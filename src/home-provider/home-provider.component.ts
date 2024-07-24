@@ -5,7 +5,6 @@ import { Quote } from '../model/quote.model';
 import { ServiceRequest } from '../model/service_request.model';
 import { ServiceReuqestService } from '../service/service_request.service';
 import { Timestamp } from 'firebase/firestore';
-import { Router } from '@angular/router';
 
 interface QuoteIt {
   uid: string;
@@ -27,39 +26,14 @@ interface QuoteIt {
 
 export class HomeProviderComponent implements OnInit {
   provider: ServiceProvider | null = null;
-  quotesService: Quote[] | null = null;
-  quotesIt: QuoteIt[] | null = null;
-  quoteIt: QuoteIt[] | null = null
-  serviceRequests: ServiceRequest[] | null = null;
+  quotesService: Quote[] | null = [];
+  quotesIt: QuoteIt[] | null = [];
+  serviceRequests: ServiceRequest[] | null = [];
 
   constructor(
     private serviceQuotes: QuoteService,
     private serviceRequestService: ServiceReuqestService
   ) {}
-
-  // async ngOnInit() {
-  //   const providerString = sessionStorage.getItem('user');
-  //   if (providerString) {
-  //     this.provider = JSON.parse(providerString);
-  //   }
-  //   if (this.provider) {
-  //     this.quotesService =
-  //       await this.serviceQuotes.getQuotesByServiceProviderId(
-  //         this.provider.uid
-  //       );
-  //   }
-  //   if (this.quotesService) {
-  //     this.quotesService.map(async (quote) => {
-  //       const serviceRequest =
-  //         await this.serviceRequestService.getServiceRequestById(
-  //           quote.serviceRequestId
-  //         );
-  //       if (this.serviceRequests) {
-  //         this.serviceRequests.push(serviceRequest);
-  //       }
-  //     });
-  //   }
-  // } 
 
   async ngOnInit() {
     const providerString = sessionStorage.getItem('user');
@@ -87,13 +61,9 @@ export class HomeProviderComponent implements OnInit {
             deletedAt: quote.deletedAt,
             serviceRequest: serviceRequest
           })
-
           if(quoteTemp && this.quotesIt) {
             this.quotesIt.push(quoteTemp)
           }
-        if (serviceRequest && this.serviceRequests) {
-          this.serviceRequests.push(serviceRequest);
-        }
       });
     }
   }
@@ -104,10 +74,11 @@ export class HomeProviderComponent implements OnInit {
   }
 
   formatedPrice(price: number): String {
-    return price.toLocaleString('pt-BR', {
+    const real = Number(price).toLocaleString('pt-BR', {
       style: 'currency',
       currency: 'BRL',
     });
+    return real
   }
 
   // async quoteByServiceRequestId(uid: string) {

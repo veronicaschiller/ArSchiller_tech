@@ -261,12 +261,28 @@ h4 {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
   margin: 0;
+}
+
+.row-2 {
+  margin-top: 8px;
+  width: 100%;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.row-2 p {
+margin: 0;
 }
 
 .row::after {
   display: none;
+}
+
+i-lucide.my-icon {
+  height: 24px;
 }
 
 .services {

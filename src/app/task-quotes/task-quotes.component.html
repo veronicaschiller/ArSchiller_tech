@@ -115,7 +115,7 @@
         <section class="demandas-em-aberto">
             <ul>
                 <li *ngFor="let quote of this.taskQuotes">
-                    <h4 *ngFor="let name of this.providerNameString">{{name}}</h4>
+                    <h4>{{getProviderName(quote.serviceProviderId)}}</h4>
                     <div class="detalhes-demanda">
                         <p class="price"><i-lucide name="circle-dollar-sign" color="#bef264" class="my-icon"></i-lucide><b>Preço do orçamento:</b>{{formatedPrice(quote.price)}}</p>
                         <div class="acoes">

@@ -154,7 +154,7 @@
             <input type="text" id="cidade" name="cidade" class="form-control" [(ngModel)]="(task.city)" required />
             <select name="Estado" [(ngModel)]="stateSelected" (change)="toggleSelectionState(this.stateSelected)"
               class="form-control">
-              <option>--Estado--</option>
+              <option disabled selected value="">Selecione seu Estado</option>
               <option *ngFor="let state of stateTemplate">
                 {{ state }}
               </option>

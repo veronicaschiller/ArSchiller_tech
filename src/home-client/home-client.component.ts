@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Client } from '../model/client.model';
 import { ServiceRequest } from '../model/service_request.model';
 import { ServiceReuqestService } from '../service/service_request.service';
+import { AuthService } from '../service/Auth.service';
 
 @Component({
   selector: 'app-home-client',
@@ -17,7 +18,8 @@ export class HomeClientComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private serviceRequestservice: ServiceReuqestService
+    private serviceRequestservice: ServiceReuqestService,
+    private authService: AuthService
   ) {}
 
   async ngOnInit() {
@@ -37,5 +39,9 @@ export class HomeClientComponent implements OnInit {
 
   seeQuotes(uid: string) {
     this.router.navigate([`/quotes/${uid}`])
+  }
+
+  toogleLogout() {
+    this.authService.logout()
   }
 }

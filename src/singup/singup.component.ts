@@ -8,6 +8,7 @@ import {
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { Client } from '../model/client.model';
 import { v4 as uuidv4 } from 'uuid';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-singup',
@@ -26,7 +27,10 @@ export class SingupComponent {
     deletedAt: null,
   };
 
-  constructor(private firestore: Firestore) {}
+  constructor(
+    private firestore: Firestore,
+    private router: Router,
+  ) {}
 
   create() {
     const auth = getAuth();
@@ -39,7 +43,7 @@ export class SingupComponent {
     addDoc(singupcollection, this.client)
       .then(() => {
         console.log(this.client.name);
-        this.client;
+        this.router.navigate(['/homeClient'])
       })
       .catch((err) => {
         console.log(err);

@@ -37,7 +37,7 @@ export class LoginComponent {
               if (userType === 'provider') {
                 this.router.navigate(['/homeprovider']);
               } else if (userType === 'client') {
-                this.authorizationService.deslogar()
+                this.authService.logout()
                 alert('Você precisa fazer o login como cliente!')
                 this.router.navigate(['/loginClient']);
               } else {
@@ -53,9 +53,6 @@ export class LoginComponent {
   }
 
   logout() {
-    this.authService.logout().then(() => {
-      sessionStorage.clear();
-      this.router.navigate(['/home']);
-    });
+    this.authService.logout()
   }
 }

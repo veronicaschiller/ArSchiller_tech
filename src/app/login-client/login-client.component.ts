@@ -38,7 +38,7 @@ export class LoginClientComponent {
                 this.router.navigate(['/homeClient']);
               }
               else if (userType === 'provider') {
-                this.authorizationService.deslogar()
+                this.authService.logout()
                 alert('Você precisa fazer o login como prestador de serviço!')
                 this.router.navigate(['/login']);
               } else {
@@ -54,10 +54,11 @@ export class LoginClientComponent {
   }
 
   logout() {
-    this.authService.logout().then(() => {
-      sessionStorage.clear();
-      this.router.navigate(['/home']);
-    });
+    this.authService.logout()
+  }
+
+  leaveToHome() {
+    this.router.navigate(['/home'])
   }
 }
 

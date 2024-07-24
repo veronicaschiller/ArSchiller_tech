@@ -8,6 +8,7 @@ import {
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { v4 as uuidv4 } from 'uuid';
 import { ServiceProvider } from '../model/service_provider.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-singup-provider',
@@ -31,7 +32,10 @@ export class SingupProviderComponent {
     deletedAt: null,
   };
 
-  constructor(private firestore: Firestore) {}
+  constructor(
+    private firestore: Firestore,
+    private router: Router,
+  ) {}
 
   toggleSelection(value: string): void {
     if(this.serviceProvider.services.includes(value)) {
@@ -53,7 +57,7 @@ export class SingupProviderComponent {
     addDoc(singupcollection, this.serviceProvider)
       .then(() => {
         console.log(this.serviceProvider.name);
-        this.serviceProvider;
+        this.router.navigate(['/homeprovider'])
       })
       .catch((err) => {
         console.log(err);

@@ -298,43 +298,33 @@
       </svg>
     </div>
     <div class="login-container">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="39"
-        height="39"
-        viewBox="0 0 39 39"
-        fill="none"
-      >
-        <path
-          d="M26 19.5H13M13 19.5L19.5 13M13 19.5L19.5 26M35.75 19.5C35.75 28.4746 28.4746 35.75 19.5 35.75C10.5254 35.75 3.25 28.4746 3.25 19.5C3.25 10.5254 10.5254 3.25 19.5 3.25C28.4746 3.25 35.75 10.5254 35.75 19.5Z"
-          stroke="#BEF264"
-          stroke-width="1.66667"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-      </svg>
+      <div class="row">
+    <i-lucide name="circle-arrow-left" class="my-icon" color="#BEF264" size="40"></i-lucide>
       <h2>Prestador</h2>
+    </div>
       <p>
         Se você quer oferecer seus serviços para clientes, faça o login abaixo ou cadastre-se.
       </p>
       <form>
         <div class="input-group">
-          <label for="email">e-mail</label>
+          <label for="email">E-mail</label>
           <input
             type="email"
             id="email"
             name="email"
+            placeholder="Digite seu e-mail"
             [(ngModel)]="(dataLogin.email)"
             required
             class="form-control"
           />
         </div>
         <div class="input-group">
-          <label for="senha">senha</label>
+          <label for="senha">Senha</label>
           <input
             type="password"
             id="senha"
             name="senha"
+            placeholder="Digite sua senha"
             [(ngModel)]="(dataLogin.password)"
             required
             class="form-control"

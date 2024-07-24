@@ -8,14 +8,11 @@ import { Injectable } from "@angular/core";
 })
 
 export class AuthorizationService {
-
     authentication = false
 
-    constructor(private firestore: AngularFirestore) { }
-
-    deslogar() {
-        sessionStorage.clear()
-    }
+    constructor(
+        private firestore: AngularFirestore,
+    ) { }
 
     obterLoginStatus = () => sessionStorage.getItem('userType')
 

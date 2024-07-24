@@ -126,7 +126,7 @@
         />
       </svg>
       <p class="name-client">{{this.provider?.name}}</p>
-      <button class="btn" id="btn-task-open" >
+      <button class="btn" id="btn-task-open" routerLink="/homeprovider">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="20"
@@ -137,7 +137,7 @@
           <g clip-path="url(#clip0_1_1367)">
             <path
               d="M10.0001 18.3333C14.6025 18.3333 18.3334 14.6024 18.3334 9.99999C18.3334 5.39762 14.6025 1.66666 10.0001 1.66666C5.39771 1.66666 1.66675 5.39762 1.66675 9.99999C1.66675 14.6024 5.39771 18.3333 10.0001 18.3333Z"
-              stroke="#1a2e05"
+              stroke="#BEF264"
               stroke-width="2.5"
               stroke-linecap="round"
               stroke-linejoin="round"
@@ -151,14 +151,14 @@
         </svg>
         <p>Orçamentos em aberto</p>
       </button>
-      <button class="btn" id="btn-task-close" routerLink="/acept-quotes">
+      <button class="btn" id="btn-task-close">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="20"
           height="20"
           viewBox="0 0 24 24"
           fill="none"
-          stroke="#BEF264"
+          stroke="#1a2e05"
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
@@ -174,7 +174,7 @@
         </svg>
         <p>Orçamentos fechados</p>
       </button>
-      <button class="btn" id="btn-task-completed">
+      <button class="btn" id="btn-task-completed" routerLink="/finhish-quotes">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="20"

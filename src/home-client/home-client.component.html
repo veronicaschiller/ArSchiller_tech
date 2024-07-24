@@ -107,6 +107,10 @@
       </svg>
       <p class="text-btn-cadastro">Cadastrar demanda</p>
     </button>
+    <button class="btn" id="logout" (click)="toogleLogout()">
+      <i-lucide name="arrow-left" class="my-icon" color="white"></i-lucide>
+      Sair
+    </button>
   </div>
   <main class="container-md">
     <h3>Demandas em Aberto</h3>
@@ -120,12 +124,18 @@
             </div>
           </div>
           <div class="detalhes-demanda">
-            <p><span-lucide name="flame" color="#bef264" class="my-icon"></span-lucide> <b> Prioridade:
-              </b>{{task.priority}}</p>
-            <p><span-lucide name="map-pin" color="#bef264" class="my-icon"></span-lucide><b> Localização: </b>
-              {{task.city}}, {{task.state}}</p>
-            <p><span-lucide name="clipboard-pen" color="#bef264" class="my-icon"></span-lucide><b> Descrição:</b>
-              {{task.description}}</p>
+            <div class="row-2">
+              <span-lucide name="flame" color="#bef264" class="my-icon"></span-lucide>
+              <p> <b> Prioridade: </b>{{task.priority}}</p>
+            </div>
+            <div class="row-2">
+              <span-lucide name="map-pin" color="#bef264" class="my-icon"></span-lucide>
+              <p><b> Localização: </b> {{task.city}}, {{task.state}}</p>
+            </div>
+            <div class="row-2">
+              <span-lucide name="clipboard-pen" color="#bef264" class="my-icon"></span-lucide>
+              <p><b> Descrição:</b> {{task.description}}</p>
+            </div>
             <div class="acoes">
               <button class="btn-orcamento" (click)="seeQuotes(task.uid)">Orçamentos
                 <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">

@@ -42,11 +42,19 @@ p {
   border-radius: 4px;
   background-color: #3a3a3a;
   color: #fff;
+  box-sizing: border-box;
 }
 
 input:focus::-webkit-input-placeholder {
   transition: 0.2s;
   color: transparent;
+}
+
+i-lucide.my-icon{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 
 .login-btn {
@@ -58,7 +66,7 @@ input:focus::-webkit-input-placeholder {
   padding: 16px;
   border: none;
   border-radius: 4px;
-  background-color: #6bdb65;
+  background-color: #BEF264;
   color: #1a2e05;
   font-size: 1em;
   cursor: pointer;

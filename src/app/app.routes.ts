@@ -15,6 +15,8 @@ import { CreateQuotesProviderComponent } from '../create-quotes-provider/create-
 import { TaskQuotesProviderComponent } from './task-quotes-provider/task-quotes-provider.component';
 import { AceptQuotesProviderComponent } from '../acept-quotes-provider/acept-quotes-provider.component';
 import { FinishQuotesProviderComponent } from '../finish-quotes-provider/finish-quotes-provider.component';
+import { CompletedTaskClientComponent } from '../completed-task-client/completed-task-client.component';
+import { FinishTaskClientComponent } from '../finish-task-client/finish-task-client.component';
 
 export const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -32,6 +34,8 @@ export const routes: Routes = [
   {path:'create-quote', component:CreateQuotesProviderComponent, canActivate:[authorizationGuardProvider]},
   {path:'acept-quotes', component:AceptQuotesProviderComponent, canActivate:[authorizationGuardProvider]},
   {path:'finhish-quotes', component:FinishQuotesProviderComponent, canActivate:[authorizationGuardProvider]},
+  {path:'finish-task', component:FinishTaskClientComponent, canActivate:[authorizationGuardClient]},
+  {path:'complete-task', component:CompletedTaskClientComponent, canActivate:[authorizationGuardClient]},
 ];
 
 @NgModule({

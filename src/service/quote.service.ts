@@ -220,7 +220,7 @@ export class QuoteService {
 
     const docRef = doc(dbFirebase, 'quotes', id)
     await updateDoc(docRef, quoteData).then(() => {
-      alert(`Demanda Alterada com sucesso`)
+      alert(`Orçamento aceito!`)
     })
   }
 
@@ -244,7 +244,7 @@ export class QuoteService {
 
     const docRef = doc(dbFirebase, 'quotes', id)
     await updateDoc(docRef, quoteData).then(() => {
-      alert(`Demanda Alterada com sucesso`)
+      alert(`Orçamento recusado!`)
     })
   }
 
@@ -268,7 +268,7 @@ export class QuoteService {
 
     const docRef = doc(dbFirebase, 'quotes', id)
     await updateDoc(docRef, quoteData).then(() => {
-      alert(`Demanda Alterada com sucesso`)
+      alert(`Orçamento finalizado com sucesso`)
     })
   }
 
@@ -299,9 +299,7 @@ export class QuoteService {
     })
     if(id) {
     const docRef = doc(dbFirebase, 'quotes', id)
-    await updateDoc(docRef, quoteData).then(() => {
-      alert(`Orçamento finalizado com sucesso`)
-    }) 
+    await updateDoc(docRef, quoteData)
   } else {
     console.log('Nenhum orçamento correspondente encontrado para o serviceProviderId  e serviceId fornecidos');
     }

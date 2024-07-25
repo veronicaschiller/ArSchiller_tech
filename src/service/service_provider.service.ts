@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ServiceProvider } from '../model/service_provider.model';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
-import { collection, getDocs, query, where } from 'firebase/firestore';
+import { collection, getDocs, limit, query, where } from 'firebase/firestore';
 import { dbFirebase } from '../envitonments/environment'
 
 @Injectable({
@@ -54,9 +54,9 @@ export class ServiceProviderService {
 
     async getProviderById(uid: string) {
       try {
-        const providers = collection(dbFirebase, this.dbPath)
-        const q = query(providers, where('uid', '==', uid))
-  
+        const provider = collection(dbFirebase, this.dbPath)
+        const q = query(provider, where('uid', '==', uid))
+        
         const querySnapShot = await getDocs(q)
   
         if (querySnapShot.empty) {
@@ -66,7 +66,7 @@ export class ServiceProviderService {
   
         let providerData: any;
         querySnapShot.forEach((doc) => {
-         providerData = { id: doc.id, ...doc.data() };
+         providerData = ({ id: doc.id, ...doc.data() });
         });
         
         return providerData;

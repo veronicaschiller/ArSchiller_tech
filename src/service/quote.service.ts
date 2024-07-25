@@ -17,28 +17,24 @@ export class QuoteService {
   }
 
   async createQuote(data: Quote): Promise<Object> {
-    const quote = {
-      price: Number(data.price),
-      serviceProviderId: data.serviceProviderId,
-      serviceRequestId: data.serviceRequestId,
-      status: data.status
-    }
-    
     const quoteDoc = collection(dbFirebase, this.dbPath);
-    addDoc(quoteDoc, quote)
+    addDoc(quoteDoc, data)
       .then(() => {
-        console.log(quote);
+        console.log(data);
       })
       .catch((err) => {
         console.log(err);
       });
-      return quote
+      return data
   }
 
   async getQuotesByServiceRequestId(uid: string) {
     try {
       const serviceRequest = collection(dbFirebase, this.dbPath)
-      const q = query(serviceRequest, where('serviceRequestId', '==', uid))
+      const q = query(serviceRequest,
+        where('serviceRequestId', '==', uid),
+        where('status', '==', '')
+      )
 
       const querySnapShot = await getDocs(q)
 
@@ -69,10 +65,38 @@ export class QuoteService {
     }
   }
 
+  async getQuoteByServiceIdAndServiceProviderId(serviceid: string, providerid: string) {
+    try {
+      const quote = collection(dbFirebase, this.dbPath)
+      const q = query(quote, 
+        where('serviceRequestId', '==', serviceid),
+        where('serviceProviderId', '==', providerid)
+    )
+
+      const querySnapShot = await getDocs(q)
+
+      if (querySnapShot.empty) {
+        console.log('Orçamento não existe');
+      }
+
+      let quoteData: any;
+      querySnapShot.forEach((doc) => {
+       quoteData = { id: doc.id, ...doc.data() };
+      });
+      
+      return quoteData
+    } catch (error) {
+      throw new Error(`Erro ao buscar orçamento: ${error}` );
+    }
+  }
+
   async getQuotesByServiceProviderId(uid: string) {
     try {
-      const serviceRequest = collection(dbFirebase, this.dbPath)
-      const q = query(serviceRequest, where('serviceProviderId', '==', uid))
+      const quote = collection(dbFirebase, this.dbPath)
+      const q = query(quote, 
+        where('serviceProviderId', '==', uid),
+        where('status', '==', '')
+    )
 
       const querySnapShot = await getDocs(q)
 
@@ -100,6 +124,78 @@ export class QuoteService {
       return quotesArray;
     } catch (error) {
       throw new Error(`Error ao encontrar a demanda: ${error}`)
+    }
+  }
+
+  async getOpenQuotesByServiceProviderId(uid: string) {
+    try {
+      const quote = collection(dbFirebase, this.dbPath)
+      const q = query(quote,
+        where('serviceProviderId', '==', uid),
+        where('status', '==', 'accepted'))
+
+      const querySnapShot = await getDocs(q)
+
+      if (querySnapShot.empty) {
+        console.log('Demandas não encontradas')
+      }
+
+      let quotesArray: Quote[] = [];
+
+      querySnapShot.forEach((doc) => {
+        const data = doc.data()
+        const quoteData: Quote = {
+          uid: data['uid'],
+          price: data['price'],
+          serviceProviderId: data['serviceProviderId'],
+          serviceRequestId: data['serviceRequestId'],
+          status: data['status'],
+          createdAt: data['createdAt'],
+          updatedAt: data['updatedAt'],
+          deletedAt: data['deletedAt'],
+        }
+
+        quotesArray.push(quoteData);
+      });
+      return quotesArray;
+    } catch (error) {
+      throw new Error(`Error ao encontrar a demanda: ${error}`)
+    }
+  }
+
+  async getFinishQuotesByServiceProviderId(uid: string) {
+    try {
+      const quote = collection(dbFirebase, this.dbPath)
+      const q = query(quote,
+        where('serviceProviderId', '==', uid),
+        where('status', '==', 'finish'))
+
+      const querySnapShot = await getDocs(q)
+
+      if (querySnapShot.empty) {
+        console.log('Orçamentos não encontrados')
+      }
+
+      let quotesArray: Quote[] = [];
+
+      querySnapShot.forEach((doc) => {
+        const data = doc.data()
+        const quoteData: Quote = {
+          uid: data['uid'],
+          price: data['price'],
+          serviceProviderId: data['serviceProviderId'],
+          serviceRequestId: data['serviceRequestId'],
+          status: data['status'],
+          createdAt: data['createdAt'],
+          updatedAt: data['updatedAt'],
+          deletedAt: data['deletedAt'],
+        }
+
+        quotesArray.push(quoteData);
+      });
+      return quotesArray;
+    } catch (error) {
+      throw new Error(`Error ao encontrar a orçamentos: ${error}`)
     }
   }
 
@@ -112,6 +208,7 @@ export class QuoteService {
     if (querySnapShot.empty) {
      console.log('Orçamento não encontrado')
     }
+    
     let id: string = ''
     let quoteData: any
     querySnapShot.forEach((doc) => {
@@ -151,10 +248,69 @@ export class QuoteService {
     })
   }
 
+  async updateQuoteFinish(uid: string) {
+    const quote = collection(dbFirebase, this.dbPath)
+    const q = query(quote, where('uid', '==', uid))
+
+    const querySnapShot = await getDocs(q)
+
+    if (querySnapShot.empty) {
+      console.log('Orçamento não encontrado')
+    }
+    let id: string = ''
+    let quoteData: any
+    querySnapShot.forEach((doc) => {
+      const data = { id: doc.id, ...doc.data() }
+      quoteData = doc.data()
+      quoteData.status = 'finish'
+      id = data.id
+    })
+
+    const docRef = doc(dbFirebase, 'quotes', id)
+    await updateDoc(docRef, quoteData).then(() => {
+      alert(`Demanda Alterada com sucesso`)
+    })
+  }
+
+  async updateQuoteFinishByServiceRequestIdAndServiceProviderId(serviceId: string, providerId:string) {
+    const quote = collection(dbFirebase, this.dbPath)
+    const q = query(quote, 
+      where('serviceRequestId', '==', serviceId),
+    )
+
+    const querySnapShot = await getDocs(q)
+
+    if (querySnapShot.empty) {
+      console.log('Orçamento não encontrado')
+    }
+    let id: string = ''
+    let quoteData: any
+    querySnapShot.forEach((doc) => {
+      const data = doc.data()
+      console.log(serviceId)
+      console.log(data['serviceRequestId'])
+      console.log(providerId)
+      console.log(data['serviceProviderId'])
+      if(data['serviceProviderId'] === providerId) {
+        data['status'] = 'finish'
+        id = doc.id
+      }
+      quoteData = data
+    })
+    if(id) {
+    const docRef = doc(dbFirebase, 'quotes', id)
+    await updateDoc(docRef, quoteData).then(() => {
+      alert(`Orçamento finalizado com sucesso`)
+    }) 
+  } else {
+    console.log('Nenhum orçamento correspondente encontrado para o serviceProviderId  e serviceId fornecidos');
+    }
+  }
+
   async deleteQuotesById(uid: string) {
     try {
-      const quotes = collection(dbFirebase, this.dbPath)
-      const q = query(quotes, where('uid', '==', uid))
+      const quote = collection(dbFirebase, this.dbPath)
+      const q = query(quote, where('uid', '==', uid))
 
       const querySnapShot = await getDocs(q)
 

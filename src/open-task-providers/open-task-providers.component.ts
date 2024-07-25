@@ -3,9 +3,11 @@ import { ServiceRequest } from '../model/service_request.model';
 import { ServiceProvider } from '../model/service_provider.model';
 import { QuoteService } from '../service/quote.service';
 import { ServiceReuqestService } from '../service/service_request.service';
-import { Timestamp } from 'firebase/firestore';
+import { addDoc, collection, Timestamp } from 'firebase/firestore';
 import { Quote } from '../model/quote.model';
 import { Router } from '@angular/router';
+import { v4 as uuidv4 } from 'uuid';
+import { Firestore } from '@angular/fire/firestore';
 
 interface QuoteIt {
   uid: string;
@@ -18,6 +20,7 @@ interface QuoteIt {
   deletedAt?: Timestamp | null;
   serviceRequest: ServiceRequest;
 }
+
 @Component({
   selector: 'app-open-task-providers',
   templateUrl: './open-task-providers.component.html',
@@ -29,14 +32,27 @@ export class OpenTaskProvidersComponent {
   quotesIt: QuoteIt[] | null = null;
   quoteIt: QuoteIt[] | null = null;
   serviceRequests: ServiceRequest[] | null = null;
-  switchContent:{[key: string]: boolean} = {}
+  switchContent: { [key: string]: boolean } = {}
   price: number = 0;
+
 
   constructor(
     private router: Router,
     private serviceQuotes: QuoteService,
-    private serviceRequestService: ServiceReuqestService
-  ) {}
+    private serviceRequestService: ServiceReuqestService,
+    private firestore: Firestore,
+  ) { }
+
+  quote: Quote = {
+      uid: uuidv4(),
+      price: 0,
+      serviceProviderId: '',
+      serviceRequestId: '',
+      status: '',
+      createdAt: Timestamp.now(),
+      updatedAt: Timestamp.now(),
+      deletedAt: null
+  };
 
   async ngOnInit() {
     const providerString = sessionStorage.getItem('user');
@@ -72,18 +88,22 @@ export class OpenTaskProvidersComponent {
   }
 
   async createQuote(serviceId: string) {
-    if (serviceId) {
-      if (this.provider) {
-        const quote = new Quote(
-          this.price,
-          this.provider.uid,
-          serviceId,
-          ''
-        );
-        await this.serviceQuotes.createQuote(quote)
+    if (this.provider && serviceId) {
+      const quote = await this.serviceQuotes.getQuoteByServiceIdAndServiceProviderId(serviceId, this.provider.uid)
+      if (!quote) {
+        this.quote.serviceProviderId = this.provider.uid
+        this.quote.serviceRequestId = serviceId
+        const quoteDoc = collection(this.firestore, 'quotes');
+        addDoc(quoteDoc, this.quote).then(() => {
+        console.log(this.quote);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+      } else {
+        alert("Você já cadastrou um orçamento para essa demanda")
       }
     }
     this.switchContent[serviceId] = !this.switchContent[serviceId];
-    this.ngOnInit()
   }
 }

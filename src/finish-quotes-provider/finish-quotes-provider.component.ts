@@ -11,7 +11,7 @@ interface QuoteIt {
   price: number;
   serviceProviderId: string;
   serviceRequestId: string;
-  status: 'accepted' | 'refused' | '';
+  status: 'accepted' | 'refused' | 'finish' | '';
   createdAt: Timestamp;
   updatedAt: Timestamp;
   deletedAt?: Timestamp | null;
@@ -39,15 +39,11 @@ export class FinishQuotesProviderComponent {
       this.provider = JSON.parse(providerString);
     }
     if (this.provider) {
-      this.quotesService =
-        await this.serviceQuotes.getQuotesByServiceProviderId(
-          this.provider.uid
-        );
+      this.quotesService = await this.serviceQuotes.getFinishQuotesByServiceProviderId(this.provider.uid);
     }
     if (this.quotesService) {
       this.quotesService.map(async (quote) => {
-        const serviceRequest =
-          await this.serviceRequestService.getServiceRequestById(quote.serviceRequestId);
+        const serviceRequest = await this.serviceRequestService.getServiceRequestById(quote.serviceRequestId);
           const quoteTemp: QuoteIt = ({
             uid: quote.uid,
             price: quote.price,

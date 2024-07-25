@@ -5,7 +5,7 @@ export class Quote {
     price!: number;
     serviceProviderId!: string;
     serviceRequestId!: string;
-    status: 'accepted' | 'refused' | '' = ''
+    status: 'accepted' | 'refused' | 'finish' | '' = ''
     createdAt!: Timestamp
     updatedAt!: Timestamp
     deletedAt?: Timestamp | null

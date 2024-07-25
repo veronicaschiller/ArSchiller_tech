@@ -58,7 +58,7 @@
         fill="#1A2E05" />
     </svg>
     <p class="name-client">{{this.provider?.name}}</p>
-    <button class="btn" id="btn-task-open">
+    <button class="btn" id="btn-task-open" routerLink="/homeprovider">
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
         <g clip-path="url(#clip0_1_1367)">
           <path
@@ -73,7 +73,7 @@
       </svg>
       <p>Orçamentos em aberto</p>
     </button>
-    <button class="btn" id="btn-task-close">
+    <button class="btn" id="btn-task-close" routerLink="/acept-quotes">
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#BEF264"
         stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-handshake">
         <path d="m11 17 2 2a1 1 0 1 0 3-3" />
@@ -85,7 +85,7 @@
       </svg>
       <p>Orçamentos fechados</p>
     </button>
-    <button class="btn" id="btn-task-completed" routerLink="/acept-quotes">
+    <button class="btn" id="btn-task-completed" routerLink="/finhish-quotes">
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
         <g clip-path="url(#clip0_1_1377)">
           <path
@@ -150,7 +150,7 @@
             <div class="acoes_2" *ngIf="switchContent[task.uid]">
               <div class="input-group text-light">
                 <i-lucide name="circle-dollar-sign" color="#A1A1AA" class="my-icon"></i-lucide> 
-                <input type="text" id="text" class="form-control" aria-label="Amount (to the nearest dollar)" placeholder="Digite seu preço" [(ngModel)]="this.price">
+                <input type="number" id="text" class="form-control" aria-label="Amount (to the nearest dollar)" placeholder="Digite seu preço" [(ngModel)]="(this.quote.price)">
               </div>
               <button class="btn-orcamento-2" (click)="createQuote(task.uid)">Confirmar orçamento</button>
               <button class="btn-excluir" (click)="toogleDiv(task.uid)">

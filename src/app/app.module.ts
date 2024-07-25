@@ -20,10 +20,12 @@ import { LucideAngularModule, Flame, MapPin, ClipboardPen, CircleDollarSign, Mov
 import { TaskQuotesComponent } from "./task-quotes/task-quotes.component";
 import { HomeProviderComponent } from "../home-provider/home-provider.component";
 import { OpenTaskProvidersComponent } from "../open-task-providers/open-task-providers.component";
-import { CreateQuotesProviderComponent } from "../create-quotes-provider/create-quotes-provider.component";
 import { TaskQuotesProviderComponent } from "./task-quotes-provider/task-quotes-provider.component";
 import { AceptQuotesProviderComponent } from "../acept-quotes-provider/acept-quotes-provider.component";
 import { FinishQuotesProviderComponent } from "../finish-quotes-provider/finish-quotes-provider.component";
+import { CompletedTaskClientComponent } from '../completed-task-client/completed-task-client.component';
+import { FinishTaskClientComponent } from '../finish-task-client/finish-task-client.component';
+
 
 @NgModule({
     declarations: [
@@ -38,10 +40,11 @@ import { FinishQuotesProviderComponent } from "../finish-quotes-provider/finish-
         TaskQuotesComponent,
         HomeProviderComponent,
         OpenTaskProvidersComponent,
-        CreateQuotesProviderComponent,
         TaskQuotesProviderComponent,
         AceptQuotesProviderComponent,
-        FinishQuotesProviderComponent
+        FinishQuotesProviderComponent,
+        CompletedTaskClientComponent,
+        FinishTaskClientComponent,
     ],
     imports:[
         BrowserModule,

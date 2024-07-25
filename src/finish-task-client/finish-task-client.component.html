@@ -73,7 +73,7 @@
       </svg>
       <p>Demandas em aberto</p>
     </button>
-    <button class="btn" id="btn-task-close">
+    <button class="btn" id="btn-task-close" routerLink="/finish-task">
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#BEF264"
         stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-handshake">
         <path d="m11 17 2 2a1 1 0 1 0 3-3" />
@@ -85,7 +85,7 @@
       </svg>
       <p>Demandas fechadas</p>
     </button>
-    <button class="btn" id="btn-task-completed">
+    <button class="btn" id="btn-task-completed" routerLink="/complete-task">
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
         <g clip-path="url(#clip0_1_1377)">
           <path
@@ -107,6 +107,44 @@
       </svg>
       <p class="text-btn-cadastro">Cadastrar demanda</p>
     </button>
+    <button class="btn" id="logout" (click)="toogleLogout()">
+      <i-lucide name="arrow-left" class="my-icon" color="white"></i-lucide>
+      Sair
+    </button>
   </div>
-  </body>
+  <main class="container-md">
+    <h3>Demandas fechadas</h3>
+    <section class="demandas-em-aberto">
+      <ul>
+        <li *ngFor="let task of this.serviceRequests">
+          <div class="row">
+            <h4>{{ task.title }}</h4>
+            <div class="services">
+              <a *ngFor="let service of task.tagService">{{service}}</a>
+            </div>
+          </div>
+          <div class="detalhes-demanda">
+            <div class="row-2">
+              <span-lucide name="flame" color="#bef264" class="my-icon"></span-lucide>
+              <p> <b> Prioridade: </b>{{task.priority}}</p>
+            </div>
+            <div class="row-2">
+              <span-lucide name="map-pin" color="#bef264" class="my-icon"></span-lucide>
+              <p><b> Localização: </b> {{task.city}}, {{task.state}}</p>
+            </div>
+            <div class="row-2">
+              <span-lucide name="clipboard-pen" color="#bef264" class="my-icon"></span-lucide>
+              <p><b> Descrição:</b> {{task.description}}</p>
+            </div>
+            <div class="acoes">
+              <button class="btn-orcamento" (click)="toggleCompletedTask(task.uid)">Encerrar demanda
+              </button>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </section>
+  </main>
+</body>
+
 </html>

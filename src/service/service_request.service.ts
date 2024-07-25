@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ServiceRequest } from '../model/service_request.model';
 import { dbFirebase } from '../envitonments/environment';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
-import { collection, where, getDocs, query, doc, deleteDoc } from 'firebase/firestore';
+import { collection, where, getDocs, query, doc, deleteDoc, updateDoc } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +31,10 @@ export class ServiceReuqestService {
   async getServiceRequestByClientId(uid: string): Promise<ServiceRequest[]> {
     try {
       const serviceRequest = collection(dbFirebase, this.dbPath)
-      const q = query(serviceRequest, where('clientId', '==', uid))
+      const q = query(serviceRequest,
+        where('clientId', '==', uid),
+        where('serviceProviderId', '==', '')
+      )
 
       const querySnapShot = await getDocs(q)
 
@@ -67,19 +70,105 @@ export class ServiceReuqestService {
     }
   }
 
+  async getFinishServiceRequestByClientId(uid: string): Promise<ServiceRequest[]> {
+    try {
+      const serviceRequests = collection(dbFirebase, this.dbPath)
+      const q = query(serviceRequests, 
+        where('clientId', '==', uid),
+        where('isActived', '==', true)
+      )
+
+      const querySnapShot = await getDocs(q)
+
+      if (querySnapShot.empty) {
+        console.log('Cliente não tem demandas')
+      }
+
+      let serviceRequestArray: ServiceRequest[] = [];
+      querySnapShot.forEach((doc) => {
+        const data = doc.data()
+        if (data['serviceProviderId'] !== '') {
+          const serviceRequestData: ServiceRequest = {
+            uid: data['uid'],
+            title: data['title'],
+            description: data['description'],
+            tagService: data['tagService'],
+            priority: data['priority'],
+            clientId: data['clientId'],
+            serviceProviderId: data['serviceProviderId'],
+            city: data['city'],
+            state: data['state'],
+            createdAt: data['createdAt'],
+            updatedAt: data['updatedAt'],
+            deletedAt: data['deletedAt'],
+            quotes: data['quotes'],
+            isActived: data['isActived'],
+          }
+          serviceRequestArray.push(serviceRequestData);
+        }
+      });
+      return serviceRequestArray;
+    } catch (error) {
+      throw new Error('Erro ao buscar demandas')
+    }
+  }
+
+  async getCompletedServiceRequestByClientId(uid: string): Promise<ServiceRequest[]> {
+    try {
+      const serviceRequests = collection(dbFirebase, this.dbPath)
+      const q = query(serviceRequests, 
+        where('clientId', '==', uid),
+        where('isActived', '==', false)
+      )
+
+      const querySnapShot = await getDocs(q)
+
+      if (querySnapShot.empty) {
+        console.log('Cliente não tem demandas')
+      }
+
+      let serviceRequestArray: ServiceRequest[] = [];
+      querySnapShot.forEach((doc) => {
+        const data = doc.data()
+        if (data['serviceProviderId'] !== '') {
+          const serviceRequestData: ServiceRequest = {
+            uid: data['uid'],
+            title: data['title'],
+            description: data['description'],
+            tagService: data['tagService'],
+            priority: data['priority'],
+            clientId: data['clientId'],
+            serviceProviderId: data['serviceProviderId'],
+            city: data['city'],
+            state: data['state'],
+            createdAt: data['createdAt'],
+            updatedAt: data['updatedAt'],
+            deletedAt: data['deletedAt'],
+            quotes: data['quotes'],
+            isActived: data['isActived'],
+          }
+          serviceRequestArray.push(serviceRequestData);
+        }
+      });
+      return serviceRequestArray;
+    } catch (error) {
+      throw new Error('Erro ao buscar demandas')
+    }
+  }
+
   async getServiceRequestByServiceProviderServices(services: String[]): Promise<ServiceRequest[]> {
     try {
       let serviceRequestArray: ServiceRequest[] = [];
       const serviceRequest = collection(dbFirebase, this.dbPath)
       const q = query(
-        serviceRequest, 
+        serviceRequest,
         where('tagService', 'array-contains-any', services),
         where('isActived', '==', true)
       )
 
       const querySnapShot = await getDocs(q)
       if (querySnapShot.empty) {
-       console.log('Não há demandas para este prestador')
+        console.log('Não há demandas para este prestador')
       }
 
       querySnapShot.forEach((doc) => {
@@ -121,13 +210,69 @@ export class ServiceReuqestService {
 
       let serviceRequestData: any;
       querySnapShot.forEach((doc) => {
-       serviceRequestData = { id: doc.id, ...doc.data() };
+        serviceRequestData = { id: doc.id, ...doc.data() };
       });
-      
+
       return serviceRequestData
     } catch (error) {
-      throw new Error(`Erro ao buscar demanda: ${error}` );
+      throw new Error(`Erro ao buscar demanda: ${error}`);
     }
+  }
+
+  async updateFinishServiceRequestById(uid: string, providerId: string) {
+    const serviceRequest = collection(dbFirebase, this.dbPath)
+    const q = query(serviceRequest,
+      where('uid', '==', uid),
+      where('serviceProviderId', '==', '')
+    )
+
+    const querySnapShot = await getDocs(q)
+
+    if (querySnapShot.empty) {
+      console.log('Demanda não existe');
+    }
+
+    let id: string = ''
+    let serviceRequestData: any
+    querySnapShot.forEach((doc) => {
+      const data = { id: doc.id, ...doc.data() }
+      serviceRequestData = doc.data()
+      serviceRequestData.serviceProviderId = providerId
+      id = data.id
+    })
+
+    const docRef = doc(dbFirebase, 'tasks', id)
+    await updateDoc(docRef, serviceRequestData).then(() => {
+      alert(`Demanda Alterada com sucesso`)
+    })
+  }
+
+  async updateCompletedServiceRequestById(uid: string) {
+    const serviceRequest = collection(dbFirebase, this.dbPath)
+    const q = query(serviceRequest,
+      where('uid', '==', uid),
+      where('isActived', '==', true)
+    )
+
+    const querySnapShot = await getDocs(q)
+
+    if (querySnapShot.empty) {
+      console.log('Demanda não existe');
+    }
+
+    let id: string = ''
+    let serviceRequestData: any
+    querySnapShot.forEach((doc) => {
+      const data = { id: doc.id, ...doc.data() }
+      serviceRequestData = doc.data()
+      serviceRequestData.isActived = false
+      id = data.id
+    })
+
+    const docRef = doc(dbFirebase, 'tasks', id)
+    await updateDoc(docRef, serviceRequestData).then(() => {
+      alert(`Demanda Encerrada com sucesso`)
+    })
   }
 
   async deleteServiceRequestById(uid: string) {
@@ -142,7 +287,7 @@ export class ServiceReuqestService {
       }
       let id: string = ''
       querySnapShot.forEach((doc) => {
-        const data = {id: doc.id, ...doc.data()}
+        const data = { id: doc.id, ...doc.data() }
         id = data.id
       })
 
@@ -150,7 +295,7 @@ export class ServiceReuqestService {
       await deleteDoc(docRef).then(() => {
         alert(`Demanda Excluída com sucesso`)
       })
-    
+
     } catch (error) {
       throw new Error(`Error message: ${error}`)
     }

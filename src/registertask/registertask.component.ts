@@ -48,6 +48,7 @@ export class RegistertaskComponent {
     city: '',
     state: '',
     clientId: '',
+    serviceProviderId: '',
     isActived: true,
     createdAt: Timestamp.now(),
     updatedAt: Timestamp.now(),

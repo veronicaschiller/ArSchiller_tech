@@ -12,29 +12,29 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class TaskQuotesProviderComponent {
   taskQuotes: any
-taskId: string = ''
-user: Client | ServiceProvider | null = null
-providerNameString: String[] = []
+  taskId: string = ''
+  user: Client | ServiceProvider | null = null
+  providerNameString: String[] = []
 
   constructor(
     private serviceProviderService: ServiceProviderService,
     private quoteService: QuoteService,
     private _route: ActivatedRoute,
-  ) {}
+  ) { }
 
   async ngOnInit() {
     this.taskId = String(this._route.snapshot.paramMap.get('taskId'))
     this.taskQuotes = await this.quoteService.getQuotesByServiceRequestId(this.taskId)
-    const userString = sessionStorage.getItem('user')
-      if(userString) {
+    this.taskQuotes.map(async (quote: any) => {
+      if (quote.serviceProviderId) {
+        const nameProvider = await this.serviceProviderService.getProviderById(quote.serviceProviderId)
+        this.providerNameString.push(nameProvider?.name)
+      }
+      const userString = sessionStorage.getItem('user')
+      if (userString) {
         this.user = JSON.parse(userString)
       }
-      this.taskQuotes.map(async (quote: any) => {
-        if(quote.serviceProviderId) {
-          const nameProvider = await this.serviceProviderService.getProviderById(quote.serviceProviderId)
-          this.providerNameString.push(nameProvider.name)
-        }
-      })
+    })
   }
 
   async toggleRefuseQuote(uid: string) {

@@ -115,14 +115,14 @@
         <section class="demandas-em-aberto">
             <ul>
                 <li *ngFor="let quote of this.taskQuotes; let i = index">
-                    <h4>{{this.providerNameString[i]}}</h4>
+                    <h4>{{this.providerNameString[i].name}}</h4>
                     <div class="detalhes-demanda">
                         <p class="price"><i-lucide name="circle-dollar-sign" color="#bef264" class="my-icon"></i-lucide><b>Preço do orçamento:</b>{{formatedPrice(quote.price)}}</p>
                         <div class="acoes">
                             <button class="btn-recusar-orcamento" (click)="toggleRefuseQuote(quote.uid)">Recusar
                                 orçamento
                             </button>
-                            <button class="btn-aceitar-orcamento" (click)="toggleAcceptQuote(quote.uid)">
+                            <button class="btn-aceitar-orcamento" (click)="toggleAcceptQuote(quote.uid, this.providerNameString[i].uid)">
                                 <span>Aceitar orçamento</span>
                             </button>
                         </div>

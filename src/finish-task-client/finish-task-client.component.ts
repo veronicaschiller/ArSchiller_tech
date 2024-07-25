@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Client } from '../model/client.model';
 import { ServiceRequest } from '../model/service_request.model';
 import { ServiceReuqestService } from '../service/service_request.service';
+import { QuoteService } from '../service/quote.service';
 
 
 @Component({
@@ -17,7 +18,8 @@ export class FinishTaskClientComponent {
 
   constructor(
     private router: Router,
-    private serviceRequestservice: ServiceReuqestService
+    private serviceRequestservice: ServiceReuqestService,
+    private quoteService: QuoteService
   ) {}
 
   async ngOnInit() {
@@ -27,9 +29,7 @@ export class FinishTaskClientComponent {
     }
     if (this.user) {
       this.serviceRequests =
-        await this.serviceRequestservice.getServiceRequestByClientId(
-          this.user.uid
-        );
+        await this.serviceRequestservice.getFinishServiceRequestByClientId(this.user.uid);
     }
   }
 
@@ -40,5 +40,16 @@ export class FinishTaskClientComponent {
 
   seeQuotes(uid: string) {
     this.router.navigate([`/quotes/${uid}`]);
+  }
+  toogleLogout() {
+  
+  }
+
+  async toggleCompletedTask(uid: string) {
+    await this.serviceRequestservice.updateCompletedServiceRequestById(uid)
+    if(this.user) {
+      const task = await this.serviceRequestservice.getServiceRequestById(uid)
+      await this.quoteService.updateQuoteFinishByServiceRequestIdAndServiceProviderId(uid, task.serviceProviderId)
+    }
   }
 }

@@ -12,7 +12,7 @@ interface QuoteIt {
   price: number;
   serviceProviderId: string;
   serviceRequestId: string;
-  status: 'accepted' | 'refused' | '';
+  status: 'accepted' | 'refused' | 'finish' | '';
   createdAt: Timestamp;
   updatedAt: Timestamp;
   deletedAt?: Timestamp | null;
@@ -28,7 +28,6 @@ export class AceptQuotesProviderComponent {
   quotesService: Quote[] | null = [];
   quotesIt: QuoteIt[] | null = [];
   serviceRequests: ServiceRequest[] | null = [];
-  selectButton:string = 'open'
 
   constructor(
     private router: Router,
@@ -42,15 +41,11 @@ export class AceptQuotesProviderComponent {
       this.provider = JSON.parse(providerString);
     }
     if (this.provider) {
-      this.quotesService =
-        await this.serviceQuotes.getQuotesByServiceProviderId(
-          this.provider.uid
-        );
+      this.quotesService = await this.serviceQuotes.getOpenQuotesByServiceProviderId(this.provider.uid);
     }
     if (this.quotesService) {
       this.quotesService.map(async (quote) => {
-        const serviceRequest =
-          await this.serviceRequestService.getServiceRequestById(quote.serviceRequestId);
+        const serviceRequest = await this.serviceRequestService.getServiceRequestById(quote.serviceRequestId);
           const quoteTemp: QuoteIt = ({
             uid: quote.uid,
             price: quote.price,
@@ -81,16 +76,5 @@ export class AceptQuotesProviderComponent {
     });
     return real
   }
-
-  // função para quando selecionar o botão ele ficar ativo e os outros inativos 
-  selecteButton(button:string){
-    this.selectButton = button;
-  }
-  // função que deve se aplicada no botão
-  // <button 
-  //   [class.selected]="selectedButton === 'aberto'"
-  //   (click)="selectButton('aberto')">
-  //   Orçamentos Em Aberto
-  // </button>
 
 }

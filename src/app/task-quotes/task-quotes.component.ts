@@ -4,6 +4,7 @@ import { Client } from '../../model/client.model';
 import { QuoteService } from '../../service/quote.service';
 import { ServiceProviderService } from '../../service/service_provider.service';
 import { ServiceProvider } from '../../model/service_provider.model';
+import { ServiceReuqestService } from '../../service/service_request.service';
 
 
 @Component({
@@ -16,12 +17,13 @@ export class TaskQuotesComponent implements OnInit {
 taskQuotes: any
 taskId: string = ''
 user: Client | ServiceProvider | null = null
-providerNameString: String[] = []
+providerNameString: ServiceProvider[] = []
 
   constructor(
     private serviceProviderService: ServiceProviderService,
     private quoteService: QuoteService,
     private _route: ActivatedRoute,
+    private serviceRequestService: ServiceReuqestService
   ) {}
 
   async ngOnInit() {
@@ -34,7 +36,7 @@ providerNameString: String[] = []
       this.taskQuotes.map(async (quote: any) => {
         if(quote.serviceProviderId) {
           const nameProvider = await this.serviceProviderService.getProviderById(quote.serviceProviderId)
-          this.providerNameString.push(nameProvider.name)
+          this.providerNameString.push(nameProvider)
         }
       })
   }
@@ -43,8 +45,9 @@ providerNameString: String[] = []
     await this.quoteService.updateQuoteRefused(uid)
   }
 
-  async toggleAcceptQuote(uid: string) {
-    await this.quoteService.updateQuoteAccepted(uid)
+  async toggleAcceptQuote(quoteId: string, providerId: string) {
+    await this.serviceRequestService.updateFinishServiceRequestById(this.taskId, providerId)
+    await this.quoteService.updateQuoteAccepted(quoteId)
   }
 
   formatedPrice(price: number): String {
